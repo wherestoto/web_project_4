@@ -1,0 +1,12 @@
+.main {
+  position: relative;
+  max-width: 880px;
+  color: #545454; 
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 880px) {
+  .main {
+    margin: 0 19px 0;
+  }
+}
