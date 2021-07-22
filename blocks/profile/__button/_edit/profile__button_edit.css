@@ -1,0 +1,6 @@
+.profile__button_edit {
+  grid-area: 1 / -2 / 2 / -1;
+  justify-self: end;
+  align-self: end;
+  margin-bottom: 10px;
+}
