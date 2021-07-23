@@ -1,5 +1,8 @@
 .profile__card-item {
-  display: flex;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
