@@ -1,0 +1,8 @@
+.button_like {
+  width: 21px;
+  height: 19px;
+  position: absolute;
+  right: 18px;
+  bottom: 30px;
+  background: url(../../../images/heart.svg) no-repeat center;
+}
