@@ -6,3 +6,7 @@
   bottom: 30px;
   background: url(../../../images/heart.svg) no-repeat center;
 }
+
+.button_like:hover {
+  opacity: 0.5;
+}
