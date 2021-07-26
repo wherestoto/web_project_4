@@ -6,3 +6,10 @@
   justify-content: center;
   align-items: center;
 }
+
+@media screen and (max-width: 618px) {
+  .profile__card-item {
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+}
