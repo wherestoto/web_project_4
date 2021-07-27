@@ -1,0 +1,10 @@
+.photo__card {
+  width: 282px;
+  height: 361px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+}
