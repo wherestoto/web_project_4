@@ -13,49 +13,45 @@
   </header>
   <main class="main">
     <section class="profile">
-      <ul class="profile__card">
-        <li class="profile__card-item">
-          <img class="profile__avatar" src="images/jacques-cousteau.jpg" alt="jacques cousteau portrait">
-          <div class="profile__info">
-            <button class="button button_edit profile__button_edit"></button>
-            <h2 class="profile__name">Jacques Cousteau</h2>
-            <p class="profile__title">Explorer</p>
-          </div>
-        </li>
-      </ul>
-      <button class="button button_add profile__button_add"></button>
+      <img class="profile__avatar" src="images/jacques-cousteau.jpg" alt="jacques cousteau portrait">
+      <div class="profile__info">
+        <h1 class="profile__name">Jacques Cousteau</h1>
+        <button class="button button__edit profile__edit-button" type="button"></button>
+        <p class="profile__description">Explorer</p>
+      </div>
+      <button class="button button__add profile__add-button" type="button"></button>
     </section>
     <section class="photos">
       <ul class="photo__card-grid">
-        <li class="photo__card-item">
+        <li class="photo__card">
           <img class="photo__card-img" src="images/chor-tsang-big-sur-mcway-falls-CA.jpg" alt="big-sur-mcway-falls-california">
           <h2 class="photo__title">McWay Falls</h2>
-          <button class="button button_like"></button>
+          <button class="button button__like" type="button"></button>
         </li>
-        <li class="photo__card-item">
+        <li class="photo__card">
           <img class="photo__card-img" src="images/dino-reichmuth-arches-natl-park-moab.jpg" alt="arches-national-park">
           <h2 class="photo__title">Arches National Park</h2>
-          <button class="button button_like"></button>
+          <button class="button button__like" type="button"></button>
         </li>
-        <li class="photo__card-item">
+        <li class="photo__card">
           <img class="photo__card-img" src="images/dylan-taylor-inian-islands-alaska.jpg" alt="dylan-taylor-inian-islands-alaska">
           <h2 class="photo__title">Inian Islands</h2>
-          <button class="button button_like"></button>
+          <button class="button button__like" type="button"></button>
         </li>
-        <li class="photo__card-item">
+        <li class="photo__card">
           <img class="photo__card-img" src="images/madhu-shesharam-antelope-canyon.jpg" alt="madhu-shesharam-antelope-canyon">
           <h2 class="photo__title">Antelope Canyon, Page, AZ</h2>
-          <button class="button button_like"></button>
+          <button class="button button__like" type="button"></button>
         </li>
-        <li class="photo__card-item">
+        <li class="photo__card">
           <img class="photo__card-img" src="images/nick-dunlap-grand-teton.jpg" alt="nick-dunlap-grand-teton">
           <h2 class="photo__title">Grand Teton National Park</h2>
-          <button class="button button_like"></button>
+          <button class="button button__like" type="button"></button>
         </li>
-        <li class="photo__card-item">
+        <li class="photo__card">
           <img class="photo__card-img" src="images/vincent-ledvina-boulder-co.jpg" alt="boulder colorado">
           <h2 class="photo__title">Boulder, Colorado</h2>
-          <button class="button button_like"></button>
+          <button class="button button__like" type="button"></button>
         </li>
       </ul>
     </section>
@@ -65,11 +61,11 @@
   </footer>
   <div class="popup">
     <div class="popup__container">
-      <button type="button" class="button button__close popup__button_close"></button>
+      <button class="button button__close popup__close-button" type="button"></button>
       <h3 class="popup__title">Edit profile</h3>
       <form class="popup__form">
         <input class="popup__input popup__input_name" type="text" name="name" placeholder="Name">
-        <input class="popup__input popup__input_title" type="text" name="title" placeholder="About Me">
+        <input class="popup__input popup__input_description" type="text" name="description" placeholder="About Me">
         <button class="button button__save" type="submit">Save</button>
       </form>
     </div>

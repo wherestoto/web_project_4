@@ -1,44 +1,23 @@
 const page = document.querySelector('.page');
-const profile = page.querySelector('.profile')
-const popup = page.querySelector('.popup');
-const popupEditBtn = profile.querySelector('.profile__button_edit');
-const popupCloseBtn = popup.querySelector('.popup__button_close');
-const popupForm = popup.querySelector('.popup__form');
-const popupInputName = popup.querySelector('.popup__input_name');
-const popupInputTitle = popup.querySelector('.popup__input_title');
+const profile = page.querySelector('.profile');
+const popupEditBtn = profile.querySelector('.profile__edit-button');
 const profileName = profile.querySelector('.profile__name');
-const profileTitle = profile.querySelector('.profile__title');
+const profileTitle = profile.querySelector('.profile__description');
+const popup = page.querySelector('.popup');
+const popupForm = popup.querySelector('.popup__form');
+const popupCloseBtn = popup.querySelector('.popup__close-button');
+const popupInputName = popup.querySelector('.popup__input_name');
+const popupInputTitle = popup.querySelector('.popup__input_description');
 
-function popupClose() {
-  popup.classList.remove('popup_opened');
+function popupToggle() {
+  popupInputName.value = profileName.textContent;
+  popupInputTitle.value = profileTitle.textContent;
+  popup.classList.toggle('popup_opened');
 }
 
-function popupOpen() {
-  popup.classList.add('popup_opened');
-}
+popupEditBtn.addEventListener('click', popupToggle);
 
-function fillInBlanks() {
-  let nameProfile = profileName.textContent;
-  let titleProfile = profileTitle.textContent;
-  popupInputName.value = nameProfile;
-  popupInputTitle.value = titleProfile;
-}
-
-popupEditBtn.addEventListener('click', () => {
-  popupOpen();
-  fillInBlanks();
-})
-
-popupCloseBtn.addEventListener('click', () => {
-  popupClose();
-})
-
-// popupForm.addEventListener('submit', (event) => {
-//   event.preventDefault();
-//   profileName.textContent = popupInputName.value;
-//   profileTitle.textContent = popupInputTitle.value;
-//   popupClose();
-// })
+popupCloseBtn.addEventListener('click', popupToggle);
 
 /* ------------------- Practicum Exercise for Legacy Code Below ------------------- */
 
@@ -54,21 +33,19 @@ let formElement = page.querySelector('.popup__form'); // Use the querySelector()
 
     // Let's find the form fields in the DOM
     let nameInput = formElement.querySelector('.popup__input_name'); // Use querySelector()
-    let jobInput = formElement.querySelector('.popup__input_title'); // Use querySelector()
+    let jobInput = formElement.querySelector('.popup__input_description'); // Use querySelector()
 
-        // Get the values of each field from the corresponding value property
-        let nameIn = nameInput.value; 
-        let jobIn = jobInput.value;
+    // Get the values of each field from the corresponding value property
 
-        // Select elements where the field values will be entered
-        let nameProfile = profile.querySelector('.profile__name');
-        let titleProfile = profile.querySelector('.profile__title');
+    // Select elements where the field values will be entered
+    let nameProfile = profile.querySelector('.profile__name');
+    let titleProfile = profile.querySelector('.profile__description');
 
-        // Insert new values using the textContent property of the querySelector() method
-        nameProfile.textContent = nameIn;
-        titleProfile.textContent = jobIn;
-        
-        popupClose();
+    // Insert new values using the textContent property of the querySelector() method
+    nameProfile.textContent = nameInput.value;
+    titleProfile.textContent = jobInput.value;
+    
+    popupToggle();
   }
 
 // Connect the handler to the form:
