@@ -1,4 +1,4 @@
-.button__like {
+.button_like {
   width: 21px;
   height: 19px;
   position: absolute;
@@ -7,6 +7,6 @@
   background: url(../../../images/heart.svg) no-repeat center;
 }
 
-.button__like:hover {
+.button_like:hover {
   opacity: 0.5;
 }
