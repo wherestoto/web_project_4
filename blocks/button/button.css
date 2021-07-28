@@ -1,6 +1,7 @@
 .button {
   padding: 0;
   border: none;
+  transition: opacity .4s ease-out .2s;
 }
 
 .button:hover {
