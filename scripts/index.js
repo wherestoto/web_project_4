@@ -6,8 +6,8 @@ const profileTitle = profile.querySelector('.profile__description');
 const popup = page.querySelector('.popup');
 const popupForm = popup.querySelector('.popup__form');
 const popupCloseBtn = popup.querySelector('.popup__close-button');
-const popupInputName = popup.querySelector('.popup__input_name');
-const popupInputTitle = popup.querySelector('.popup__input_description');
+const popupInputName = popup.querySelector('.popup__input_type_name');
+const popupInputTitle = popup.querySelector('.popup__input_type_description');
 
 function popupToggle() {
   popupInputName.value = profileName.textContent;
@@ -22,8 +22,8 @@ popupCloseBtn.addEventListener('click', popupToggle);
 let formElement = page.querySelector('.popup__form');
   function handleFormSubmit(evt) {
     evt.preventDefault();
-    let nameInput = formElement.querySelector('.popup__input_name');
-    let jobInput = formElement.querySelector('.popup__input_description');
+    let nameInput = formElement.querySelector('.popup__input_type_name');
+    let jobInput = formElement.querySelector('.popup__input_type_description');
     let nameProfile = profile.querySelector('.profile__name');
     let titleProfile = profile.querySelector('.profile__description');
 

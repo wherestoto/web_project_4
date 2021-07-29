@@ -7,8 +7,3 @@
   background-color: #FFFFFF;
   border-radius: 10px;
 }
-
-.photos__card-details {
-  display: flex;
-  align-items: baseline;
-}
