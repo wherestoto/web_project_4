@@ -19,35 +19,18 @@ popupEditBtn.addEventListener('click', popupToggle);
 
 popupCloseBtn.addEventListener('click', popupToggle);
 
-/* ------------------- Practicum Exercise for Legacy Code Below ------------------- */
-
-// Let's find the form in the DOM
-let formElement = page.querySelector('.popup__form'); // Use the querySelector() method
-
-  // Next is the form submit handler, though
-  // it won't submit anywhere just yet
+let formElement = page.querySelector('.popup__form');
   function handleFormSubmit(evt) {
-    evt.preventDefault(); // This line stops the browser from submitting the form in the default way.
-    // Having done so, we can define our own way of submitting the form.
-    // We'll explain it in more detail later.
-
-    // Let's find the form fields in the DOM
-    let nameInput = formElement.querySelector('.popup__input_name'); // Use querySelector()
-    let jobInput = formElement.querySelector('.popup__input_description'); // Use querySelector()
-
-    // Get the values of each field from the corresponding value property
-
-    // Select elements where the field values will be entered
+    evt.preventDefault();
+    let nameInput = formElement.querySelector('.popup__input_name');
+    let jobInput = formElement.querySelector('.popup__input_description');
     let nameProfile = profile.querySelector('.profile__name');
     let titleProfile = profile.querySelector('.profile__description');
 
-    // Insert new values using the textContent property of the querySelector() method
     nameProfile.textContent = nameInput.value;
     titleProfile.textContent = jobInput.value;
     
     popupToggle();
   }
 
-// Connect the handler to the form:
-// it will watch the submit event
 formElement.addEventListener('submit', handleFormSubmit);
