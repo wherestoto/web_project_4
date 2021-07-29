@@ -1,6 +1,5 @@
 .photos__card {
   width: 282px;
-  height: 361px;
   display: flex;
   flex-direction: column;
   align-items: center;
