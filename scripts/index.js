@@ -9,28 +9,29 @@ const popupCloseBtn = popup.querySelector('.popup__close-button');
 const popupInputName = popup.querySelector('.popup__input_type_name');
 const popupInputTitle = popup.querySelector('.popup__input_type_description');
 
-function popupToggle() {
+function fillInBlanks() {
   popupInputName.value = profileName.textContent;
   popupInputTitle.value = profileTitle.textContent;
-  popup.classList.toggle('popup_opened');
 }
 
-popupEditBtn.addEventListener('click', popupToggle);
+function popupClose() {
+  popup.classList.remove('popup_opened');
+}
 
-popupCloseBtn.addEventListener('click', popupToggle);
+function popupOpen() {
+  fillInBlanks();
+  popup.classList.add('popup_opened');
+}
 
-let formElement = page.querySelector('.popup__form');
-  function handleFormSubmit(evt) {
-    evt.preventDefault();
-    let nameInput = formElement.querySelector('.popup__input_type_name');
-    let jobInput = formElement.querySelector('.popup__input_type_description');
-    let nameProfile = profile.querySelector('.profile__name');
-    let titleProfile = profile.querySelector('.profile__description');
+function handleFormSubmit(evt) {
+  evt.preventDefault();
+  profileName.textContent = popupInputName.value;
+  profileTitle.textContent = popupInputTitle.value;
+  popupClose();
+}
 
-    nameProfile.textContent = nameInput.value;
-    titleProfile.textContent = jobInput.value;
-    
-    popupToggle();
-  }
+popupEditBtn.addEventListener('click', popupOpen);
 
-formElement.addEventListener('submit', handleFormSubmit);
+popupCloseBtn.addEventListener('click', popupClose);
+
+popupForm.addEventListener('submit', handleFormSubmit);
