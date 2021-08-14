@@ -1,3 +1,18 @@
 .popup_opened {
   display: flex;
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+
+  /* animation: smooth_toggle .5s linear; */
 }
+/* 
+@keyframes smooth_toggle {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+} */

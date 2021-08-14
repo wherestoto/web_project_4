@@ -1,0 +1,9 @@
+.popup__container_type_preview {
+	max-width: 75vw;
+	max-height: 75vh;
+	width: auto;
+	height: auto;
+	padding: 0;
+	justify-content: center;
+	background-color: transparent;
+}
