@@ -1,7 +1,5 @@
 @media screen and (max-width: 618px) {
   .popup__close-button_place_preview {
-    width: 26px;
-    height: 26px;
     right: -30px;
     top: -30px;
   }
