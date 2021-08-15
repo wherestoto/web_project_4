@@ -76,11 +76,11 @@ const submitProfileHandler = (evt) => {
   toggleModal(profileEditModal);
 }
 
-function renderCard(element, container) {
+const renderCard = (element, container) => {
   container.append(element);
 }
 
-function prependCard(element, container) {
+const prependCard = (element, container) => {
   container.prepend(element);
 }
 
