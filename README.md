@@ -15,13 +15,9 @@ Table of Contents
 
 ## About
 
-****
-
 A [Practicum](https://practicum.yandex.com/) project coded by Yury Choe in HTML, CSS, and JavaScript to make an interactive page so users can like, remove, or add photos.
 
 ## Notes
-
-****
 
 New concepts implemented:
 
@@ -32,8 +28,6 @@ New concepts implemented:
 * Transition properties for popups
 
 ## Updates
-
-****
 
 [8-13-2021] This update allows users the ability to...
 
@@ -56,8 +50,6 @@ Plans for Improvement:
 * [ ] Add ability to change avatar photo in profile.
 
 ## Tools
-
-****
 
 * Figma
 * Images
