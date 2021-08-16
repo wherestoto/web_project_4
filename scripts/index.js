@@ -40,11 +40,15 @@ const profileEditModalInputName = profileEditModal.querySelector('.popup__input_
 
 const profileEditModalInputTitle = profileEditModal.querySelector('.popup__input_type_description');
 
-const toggleModal = (modalWindow) => {
-  if (!modalWindow.classList.contains('popup_opened')) {
+const fillProfile = (profileModal) => {
+  if (!profileModal.classList.contains('popup_opened')) {
     profileEditModalInputName.value = profileName.textContent;
     profileEditModalInputTitle.value = profileTitle.textContent;
   }
+}
+
+const toggleModal = (modalWindow) => {
+  if (modalWindow === profileEditModal) fillProfile(modalWindow);
   modalWindow.classList.toggle('popup_opened');
 }
 
