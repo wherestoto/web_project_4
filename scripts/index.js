@@ -1,7 +1,5 @@
 const body = document.querySelector('.page');
 
-const modal = body.querySelector('.popup');
-
 const profile = body.querySelector('.profile');
 
 const profileEditModal = body.querySelector('.popup_type_edit-profile');
@@ -29,6 +27,14 @@ const previewImageModalCloseBtn = previewCardModal.querySelector('.popup__close-
 const profileName = profile.querySelector('.profile__name');
 
 const profileTitle = profile.querySelector('.profile__description');
+
+const addCardModalInputTitle = addCardModal.querySelector('.popup__input_type_title');
+
+const addCardModalInputLink = addCardModal.querySelector('.popup__input_type_image');
+
+const popupImage = previewCardModal.querySelector('.popup__image');
+
+const previewCaption = previewCardModal.querySelector('.popup__image-caption');
 
 const profileEditModalInputName = profileEditModal.querySelector('.popup__input_type_name');
 
@@ -58,8 +64,6 @@ const prependCard = (element, container) => {
 }
 
 const previewImage = (link, title) => {
-  const popupImage = previewCardModal.querySelector('.popup__image');
-  const previewCaption = previewCardModal.querySelector('.popup__image-caption');
   popupImage.src = link;
   popupImage.alt = title;
   previewCaption.textContent = title;
@@ -92,8 +96,6 @@ function createCard(card) {
 
 const addNewCardHandler = (evt) => {
   evt.preventDefault();
-  const addCardModalInputTitle = addCardModal.querySelector('.popup__input_type_title');
-  const addCardModalInputLink = addCardModal.querySelector('.popup__input_type_image');
   initialCards.push({title: addCardModalInputTitle.value, 
                       link: addCardModalInputLink.value});
   prependCard(createCard(initialCards[initialCards.length-1]), cardsContainer);
