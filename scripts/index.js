@@ -40,15 +40,13 @@ const profileEditModalInputName = profileEditModal.querySelector('.popup__input_
 
 const profileEditModalInputTitle = profileEditModal.querySelector('.popup__input_type_description');
 
-const fillProfile = (profileModal) => {
-  if (!profileModal.classList.contains('popup_opened')) {
-    profileEditModalInputName.value = profileName.textContent;
-    profileEditModalInputTitle.value = profileTitle.textContent;
-  }
+const fillProfile = () => {
+  profileEditModalInputName.value = profileName.textContent;
+  profileEditModalInputTitle.value = profileTitle.textContent;
+  toggleModal(profileEditModal);
 }
 
 const toggleModal = (modalWindow) => {
-  if (modalWindow === profileEditModal) fillProfile(modalWindow);
   modalWindow.classList.toggle('popup_opened');
 }
 
@@ -107,7 +105,7 @@ const addNewCardHandler = (evt) => {
   addCardModalForm.reset();
 }
 
-profileEditBtn.addEventListener('click', () => toggleModal(profileEditModal));
+profileEditBtn.addEventListener('click', fillProfile);
 
 profileCloseBtn.addEventListener('click', () => toggleModal(profileEditModal));
 
