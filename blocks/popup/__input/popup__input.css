@@ -8,9 +8,3 @@
   line-height: 1.95;
   letter-spacing: 0em;
 }
-
-.popup__input:invalid {
-  color: rgba(196, 196, 196, 1);
-  border-bottom: 1px solid rgba(255, 0, 0, 1)
-}
-
