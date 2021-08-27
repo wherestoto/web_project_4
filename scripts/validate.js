@@ -1,9 +1,9 @@
-const showInputError = (formElement, inputElement, errorMessage, settings) => {
-  console.log("printed: ", errorMessage);
-  console.log("inputElement.id 3: ", (`#${inputElement.id}-error`));
+const showInputError = (formElement, inputElement, settings) => {
+  // console.log("printed: ", inputElement.validationMessage);
+  // console.log("inputElement.id 3: ", (`#${inputElement.id}-error`));
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add(settings.inputErrorClass);
-  errorElement.textContent = errorMessage;
+  errorElement.textContent = inputElement.validationMessage;
   errorElement.classList.add(settings.errorClass);
 }
 
@@ -15,20 +15,34 @@ const hideInputError = (formElement, inputElement, settings) => {
 }
 
 const checkInputValid = (formElement, inputElement, settings) => {
-  console.log("inputElement 19: ", inputElement);
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, settings);
+    showInputError(formElement, inputElement, settings);
   } else {
     hideInputError(formElement, inputElement, settings);
   }
 }
 
+const hasInvalidInput = inputList => {
+  return inputList.some(inputElement => {
+    return !inputElement.validity.valid;
+  })
+}
+
+const toggleButtonState = (inputList, buttonElement, {inactiveButtonClass}) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add(inactiveButtonClass);
+  } else {
+    buttonElement.classList.remove(inactiveButtonClass);
+  }
+}
+
 const setEventListeners = (formElement, settings) => {
   const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+  const buttonElement = formElement.querySelector(settings.submitButtonSelector);
   inputList.forEach(inputElement => {
     inputElement.addEventListener('input', () => {
-      console.log("inputElement 34: ", inputElement);
       checkInputValid(formElement, inputElement, settings);
+      toggleButtonState(inputList, buttonElement, settings);
     })
   })
 };
