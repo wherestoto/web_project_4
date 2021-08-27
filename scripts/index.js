@@ -105,6 +105,26 @@ const addNewCardHandler = (evt) => {
   addCardModalForm.reset();
 }
 
+const checkContainer = (evt, settings) => {
+  if (!evt.target.closest(settings.containerSelector)) {
+    toggleModal(evt.currentTarget.closest(settings.modalParentSelector));
+  };
+}
+
+const setOverlayEventListener = (modalElement, settings) => {
+  modalElement.addEventListener('click', (evt) => checkContainer(evt, settings));
+}
+
+const clickModalOverlay = (settings) => {
+  const modalList = Array.from(document.querySelectorAll(settings.modalParentSelector));
+  modalList.forEach(modalElement => setOverlayEventListener(modalElement, settings));
+}
+
+clickModalOverlay({
+  containerSelector: '.popup__container',
+  modalParentSelector: '.popup', 
+})
+
 profileEditBtn.addEventListener('click', fillProfile);
 
 profileCloseBtn.addEventListener('click', () => toggleModal(profileEditModal));
