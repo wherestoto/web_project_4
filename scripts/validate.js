@@ -1,6 +1,4 @@
 const showInputError = (formElement, inputElement, settings) => {
-  // console.log("printed: ", inputElement.validationMessage);
-  // console.log("inputElement.id 3: ", (`#${inputElement.id}-error`));
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add(settings.inputErrorClass);
   errorElement.textContent = inputElement.validationMessage;
@@ -23,9 +21,7 @@ const checkInputValid = (formElement, inputElement, settings) => {
 }
 
 const hasInvalidInput = inputList => {
-  return inputList.some(inputElement => {
-    return !inputElement.validity.valid;
-  })
+  return inputList.some(inputElement => !inputElement.validity.valid);
 }
 
 const toggleButtonState = (inputList, buttonElement, {inactiveButtonClass}) => {
