@@ -125,6 +125,13 @@ clickModalOverlay({
   modalParentSelector: '.popup', 
 })
 
+function escapeModal(evt) {
+  if (evt.key === "Escape") {
+    toggleModal(document.querySelector('.popup_opened'));
+    document.removeEventListener('keydown', escapeModal);
+  }
+}
+
 profileEditBtn.addEventListener('click', fillProfile);
 
 profileCloseBtn.addEventListener('click', () => toggleModal(profileEditModal));
@@ -139,4 +146,10 @@ addCardModalForm.addEventListener('submit', addNewCardHandler);
 
 previewImageModalCloseBtn.addEventListener('click', () => toggleModal(previewCardModal));
 
+document.addEventListener('keydown', escapeModal);
+
 initialCards.forEach(card => renderCard(createCard(card), cardsContainer));
+
+
+
+
