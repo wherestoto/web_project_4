@@ -26,10 +26,17 @@ const hasInvalidInput = inputList => {
 
 const toggleButtonState = (inputList, buttonElement, {inactiveButtonClass}) => {
   if (hasInvalidInput(inputList)) {
+    buttonElement.setAttribute("disabled", true);
     buttonElement.classList.add(inactiveButtonClass);
   } else {
+    buttonElement.removeAttribute("disabled");
     buttonElement.classList.remove(inactiveButtonClass);
   }
+}
+
+const resetCardSubmitButton = () => {
+  const submitButton = addCardModalForm.querySelector(".popup__button");
+  submitButton.classList.add("popup__button_disabled");
 }
 
 const setEventListeners = (formElement, settings) => {
