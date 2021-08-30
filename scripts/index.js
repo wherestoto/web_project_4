@@ -48,6 +48,22 @@ const fillProfile = () => {
 
 const toggleModal = (modalWindow) => {
   modalWindow.classList.toggle('popup_opened');
+  checkValidEscapeModal(modalWindow);
+}
+
+const escapeModal = (evt) => {
+  if (evt.key === "Escape") {
+    toggleModal(document.querySelector('.popup_opened'));
+    resetCardSubmitButton();
+  }
+}
+
+const checkValidEscapeModal = (modalWindow) => {
+  if (modalWindow.classList.contains("popup_opened")) {
+    document.addEventListener('keydown', escapeModal);
+  } else if (!modalWindow.classList.contains("popup_opened")) {
+    document.removeEventListener('keydown', escapeModal);
+  }
 }
 
 const submitProfileHandler = (evt) => {
@@ -103,6 +119,7 @@ const addNewCardHandler = (evt) => {
   prependCard(createCard(initialCards[initialCards.length-1]), cardsContainer);
   toggleModal(addCardModal);
   addCardModalForm.reset();
+  resetCardSubmitButton();
 }
 
 const checkContainer = (evt, settings) => {
@@ -125,13 +142,6 @@ clickModalOverlay({
   modalParentSelector: '.popup', 
 })
 
-function escapeModal(evt) {
-  if (evt.key === "Escape") {
-    toggleModal(document.querySelector('.popup_opened'));
-    document.removeEventListener('keydown', escapeModal);
-  }
-}
-
 profileEditBtn.addEventListener('click', fillProfile);
 
 profileCloseBtn.addEventListener('click', () => toggleModal(profileEditModal));
@@ -146,10 +156,4 @@ addCardModalForm.addEventListener('submit', addNewCardHandler);
 
 previewImageModalCloseBtn.addEventListener('click', () => toggleModal(previewCardModal));
 
-document.addEventListener('keydown', escapeModal);
-
 initialCards.forEach(card => renderCard(createCard(card), cardsContainer));
-
-
-
-
