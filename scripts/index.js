@@ -51,18 +51,17 @@ const toggleModal = (modalWindow) => {
   checkValidEscapeModal(modalWindow);
 }
 
-const escapeModal = (evt) => {
-  if (evt.key === "Escape") {
-    toggleModal(document.querySelector('.popup_opened'));
-    resetCardSubmitButton(); /*We should reset submit button of the popup for adding cards here, we should do it only while opening of this popup.*/
-  }
-}
-
 const checkValidEscapeModal = (modalWindow) => {
   if (modalWindow.classList.contains("popup_opened")) {
     document.addEventListener('keydown', escapeModal);
   } else {
     document.removeEventListener('keydown', escapeModal);
+  }
+}
+
+const escapeModal = (evt) => {
+  if (evt.key === "Escape") {
+    toggleModal(document.querySelector('.popup_opened'));
   }
 }
 
