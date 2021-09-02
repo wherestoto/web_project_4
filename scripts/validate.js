@@ -34,9 +34,29 @@ const toggleButtonState = (inputList, buttonElement, {inactiveButtonClass}) => {
   }
 }
 
-const resetCardSubmitButton = () => {
-  const submitButton = addCardModalForm.querySelector(".popup__button");
-  submitButton.classList.add("popup__button_disabled");
+const resetErrorValidation = (modalWindow) => {
+  const errorLineVisible = modalWindow.querySelectorAll(".popup__input_type_error");
+  const errorTextVisible = modalWindow.querySelectorAll(".popup__error_visible");
+  errorLineVisible.forEach(errorLine => {
+    errorLine.classList.remove('popup__input_type_error');
+  })
+  errorTextVisible.forEach(errorText => {
+    errorText.textContent = '';
+  })
+}
+
+const resetCardFormValidation = () => {
+  const submitCardButton = addCardModalForm.querySelector(".popup__button");
+  addCardModalForm.reset();
+  submitCardButton.setAttribute("disabled", true);
+  submitCardButton.classList.add("popup__button_disabled");
+}
+
+const resetProfileFormValidation = () => {
+  const submitProfileButton = profileEditModalForm.querySelector('.popup__button');
+  profileEditModalForm.reset();
+  submitProfileButton.removeAttribute('disabled');
+  submitProfileButton.classList.remove('popup__button_disabled');
 }
 
 const setEventListeners = (formElement, settings) => {
@@ -60,11 +80,11 @@ const enableValidation = (settings) => {
   });
 }
 
-enableValidation({ /* This object is called a "settings object"; pass as "settings" parameter in enableValidation() */
+enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled", // includes style for inactive button;
-  inputErrorClass: 'popup__input_type_error', // includes style for error border;
-  errorClass: "popup__error_visible" // style for error message color
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: "popup__error_visible"
 })

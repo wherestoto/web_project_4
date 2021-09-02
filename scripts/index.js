@@ -40,13 +40,22 @@ const profileEditModalInputName = profileEditModal.querySelector('.popup__input_
 
 const profileEditModalInputTitle = profileEditModal.querySelector('.popup__input_type_description');
 
-const fillProfile = () => {
+const openProfileForm = () => {
+  resetProfileFormValidation();
   profileEditModalInputName.value = profileName.textContent;
   profileEditModalInputTitle.value = profileTitle.textContent;
   toggleModal(profileEditModal);
 }
 
+const openCardForm = () => {
+  resetCardFormValidation();
+  toggleModal(addCardModal);
+}
+
 const toggleModal = (modalWindow) => {
+  if (!modalWindow.classList.contains("popup_opened")) {
+    resetErrorValidation(modalWindow);
+  }
   modalWindow.classList.toggle('popup_opened');
   checkValidEscapeModal(modalWindow);
 }
@@ -117,13 +126,11 @@ const addNewCardHandler = (evt) => {
                       link: addCardModalInputLink.value});
   prependCard(createCard(initialCards[initialCards.length-1]), cardsContainer);
   toggleModal(addCardModal);
-  addCardModalForm.reset();
-  resetCardSubmitButton();
 }
 
 const checkContainer = (evt, settings) => {
   if (!evt.target.closest(settings.containerSelector)) {
-    toggleModal(evt.currentTarget.closest(settings.modalParentSelector));
+    evt.currentTarget.closest(settings.modalParentSelector).classList.remove(settings.openModalClass);
   };
 }
 
@@ -138,16 +145,17 @@ const clickModalOverlay = (settings) => {
 
 clickModalOverlay({
   containerSelector: '.popup__container',
-  modalParentSelector: '.popup', 
+  modalParentSelector: '.popup',
+  openModalClass: 'popup_opened'
 })
 
-profileEditBtn.addEventListener('click', fillProfile);
+profileEditBtn.addEventListener('click', openProfileForm);
 
 profileCloseBtn.addEventListener('click', () => toggleModal(profileEditModal));
 
 profileEditModalForm.addEventListener('submit', submitProfileHandler);
 
-placesAddBtn.addEventListener('click', () => toggleModal(addCardModal));
+placesAddBtn.addEventListener('click', openCardForm);
 
 addCardModalCloseBtn.addEventListener('click', () => toggleModal(addCardModal));
 
