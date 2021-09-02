@@ -26,8 +26,17 @@ New concepts implemented:
 * Javascript code integrated to make HTML & CSS page interactive
 * HTML templates
 * Transition properties for popups
+* Custom Form Validation
+* Integrating Event Handling, DOM Elements, and JavaScript Form Validation
 
 ## Updates
+
+[8-25-2021] With this update, users can...
+
+* save forms only if valid input requirements have been met,
+* make quick corrections in forms which return error messages immediately for the user,
+* exit popups with escape key presses or clicking outside the popup box,
+* reset forms to initial state after exiting popup without saving.
 
 [8-13-2021] This update allows users the ability to...
 
@@ -45,7 +54,7 @@ Plans for Improvement:
 * [x] Make "like" button functional.
 * [x] Develop ability for user to add photos with the "add" button.
 * [x] User ability to delete photo cards.
-* [ ] Add form validation to popup modals.
+* [x] Add form validation to popup modals.
 * [ ] Store user input to database. Currently, all changes will reset upon browser refresh.
 * [ ] Add ability to change avatar photo in profile.
 
