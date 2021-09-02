@@ -41,6 +41,7 @@ const profileEditModalInputName = profileEditModal.querySelector('.popup__input_
 const profileEditModalInputTitle = profileEditModal.querySelector('.popup__input_type_description');
 
 const openProfileForm = () => {
+  resetErrorValidation(profileEditModal);
   resetProfileFormValidation();
   profileEditModalInputName.value = profileName.textContent;
   profileEditModalInputTitle.value = profileTitle.textContent;
@@ -48,14 +49,12 @@ const openProfileForm = () => {
 }
 
 const openCardForm = () => {
+  resetErrorValidation(addCardModal);
   resetCardFormValidation();
   toggleModal(addCardModal);
 }
 
 const toggleModal = (modalWindow) => {
-  if (!modalWindow.classList.contains("popup_opened")) {
-    resetErrorValidation(modalWindow);
-  }
   modalWindow.classList.toggle('popup_opened');
   checkValidEscapeModal(modalWindow);
 }
