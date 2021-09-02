@@ -40,6 +40,10 @@ const profileEditModalInputName = profileEditModal.querySelector('.popup__input_
 
 const profileEditModalInputTitle = profileEditModal.querySelector('.popup__input_type_description');
 
+const addCardSubmitButton = addCardModalForm.querySelector('.popup__button');
+
+const profileSubmitButton = profileEditModalForm.querySelector('.popup__button');
+
 const openProfileForm = () => {
   resetErrorValidation(profileEditModal);
   resetProfileFormValidation();
@@ -60,7 +64,7 @@ const toggleModal = (modalWindow) => {
 }
 
 const checkValidEscapeModal = (modalWindow) => {
-  if (modalWindow.classList.contains("popup_opened")) {
+  if (modalWindow.classList.contains('popup_opened')) {
     document.addEventListener('keydown', escapeModal);
   } else {
     document.removeEventListener('keydown', escapeModal);
@@ -68,9 +72,29 @@ const checkValidEscapeModal = (modalWindow) => {
 }
 
 const escapeModal = (evt) => {
-  if (evt.key === "Escape") {
+  if (evt.key === 'Escape') {
     toggleModal(document.querySelector('.popup_opened'));
   }
+}
+
+const resetCardFormValidation = () => {
+  addCardModalForm.reset();
+  disableSubmitButton(addCardSubmitButton);
+}
+
+const disableSubmitButton = buttonElement => {
+  buttonElement.setAttribute('disabled', true);
+  buttonElement.classList.add('popup__button_disabled');
+}
+
+const resetProfileFormValidation = () => {
+  profileEditModalForm.reset();
+  enableSubmitButton(profileSubmitButton);
+}
+
+const enableSubmitButton = buttonElement => {
+  buttonElement.removeAttribute('disabled');
+  buttonElement.classList.remove('popup__button_disabled');
 }
 
 const submitProfileHandler = (evt) => {

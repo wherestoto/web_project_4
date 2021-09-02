@@ -26,37 +26,23 @@ const hasInvalidInput = inputList => {
 
 const toggleButtonState = (inputList, buttonElement, {inactiveButtonClass}) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.setAttribute("disabled", true);
+    buttonElement.setAttribute('disabled', true);
     buttonElement.classList.add(inactiveButtonClass);
   } else {
-    buttonElement.removeAttribute("disabled");
+    buttonElement.removeAttribute('disabled');
     buttonElement.classList.remove(inactiveButtonClass);
   }
 }
 
 const resetErrorValidation = (modalWindow) => {
-  const errorLineVisible = modalWindow.querySelectorAll(".popup__input_type_error");
-  const errorTextVisible = modalWindow.querySelectorAll(".popup__error_visible");
+  const errorLineVisible = modalWindow.querySelectorAll('.popup__input_type_error');
+  const errorTextVisible = modalWindow.querySelectorAll('.popup__error_visible');
   errorLineVisible.forEach(errorLine => {
     errorLine.classList.remove('popup__input_type_error');
   })
   errorTextVisible.forEach(errorText => {
     errorText.textContent = '';
   })
-}
-
-const resetCardFormValidation = () => {
-  const submitCardButton = addCardModalForm.querySelector(".popup__button");
-  addCardModalForm.reset();
-  submitCardButton.setAttribute("disabled", true);
-  submitCardButton.classList.add("popup__button_disabled");
-}
-
-const resetProfileFormValidation = () => {
-  const submitProfileButton = profileEditModalForm.querySelector('.popup__button');
-  profileEditModalForm.reset();
-  submitProfileButton.removeAttribute('disabled');
-  submitProfileButton.classList.remove('popup__button_disabled');
 }
 
 const setEventListeners = (formElement, settings) => {
@@ -83,8 +69,8 @@ const enableValidation = (settings) => {
 enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: "popup__error_visible"
+  errorClass: 'popup__error_visible'
 })
