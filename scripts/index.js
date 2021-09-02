@@ -121,8 +121,6 @@ function createCard(card) {
 
 const addNewCardHandler = (evt) => {
   evt.preventDefault();
-  initialCards.push({title: addCardModalInputTitle.value, 
-                      link: addCardModalInputLink.value});
   prependCard(createCard(initialCards[initialCards.length-1]), cardsContainer);
   toggleModal(addCardModal);
 }
