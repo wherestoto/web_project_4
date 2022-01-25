@@ -1,3 +1,5 @@
+import { FormValidator } from "./FormValidator.js";
+
 const body = document.querySelector('.page');
 
 const profile = body.querySelector('.profile');
@@ -126,6 +128,17 @@ const clickLikeButton = (element) => {
 const deleteCard = (element) => {
   element.remove();
 }
+
+const validationConfig = {
+  inputSelector: '.popup__input', 
+  submitButtonSelector: '.popup__button', 
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+const editProfileFormValidator = new FormValidator(validationConfig, document.querySelector("#edit-profile-form"))
+editProfileFormValidator.enableValidation();
 
 function createCard(card) {
   const cardTemplate = body.querySelector('#card-template').content.querySelector('.card');
