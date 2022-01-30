@@ -1,4 +1,6 @@
 import { FormValidator } from "./FormValidator.js";
+import { Card } from "./Card.js";
+import { initialCards } from "./initial-cards.js";
 
 const body = document.querySelector('.page');
 
@@ -129,7 +131,10 @@ const deleteCard = (element) => {
   element.remove();
 }
 
+
+
 const validationConfig = {
+  formSelector: '.popup__Form',
   inputSelector: '.popup__input', 
   submitButtonSelector: '.popup__button', 
   inactiveButtonClass: 'popup__button_disabled',
