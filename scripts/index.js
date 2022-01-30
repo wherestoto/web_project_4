@@ -10,6 +10,8 @@ const profileEditModal = body.querySelector('.popup_type_edit-profile');
 
 const cardsContainer = body.querySelector('.photos__card-grid');
 
+const cardTemplate = body.querySelector('#card-template').content.querySelector('.card');
+
 const addCardModal = body.querySelector('.popup_type_add-card');
 
 const previewCardModal = body.querySelector('.popup_type_preview');
@@ -49,7 +51,8 @@ const addCardSubmitButton = addCardModalForm.querySelector('.popup__button');
 const profileSubmitButton = profileEditModalForm.querySelector('.popup__button');
 
 const openProfileForm = () => {
-  resetErrorValidation(profileEditModal);
+  const reset = new FormValidator(validationConfig, profileEditModal);
+  reset.resetErrorValidation(profileEditModal);
   resetProfileFormValidation();
   profileEditModalInputName.value = profileName.textContent;
   profileEditModalInputTitle.value = profileTitle.textContent;
@@ -57,7 +60,8 @@ const openProfileForm = () => {
 }
 
 const openCardForm = () => {
-  resetErrorValidation(addCardModal);
+  const reset = new FormValidator(validationConfig, addCardModal);
+  reset.resetErrorValidation(addCardModal);
   resetCardFormValidation();
   toggleModal(addCardModal);
 }
@@ -109,29 +113,16 @@ const submitProfileHandler = (evt) => {
 }
 
 const renderCard = (element, container) => {
-  container.append(element);
+  const card = new Card(cardTemplate, element);
+  
+  container.append(card.generateCard());
 }
 
 const prependCard = (element, container) => {
-  container.prepend(element);
+  const card = new Card(cardTemplate, element);
+
+  container.prepend(card.generateCard());
 }
-
-const previewImage = (link, title) => {
-  popupImage.src = link;
-  popupImage.alt = title;
-  previewCaption.textContent = title;
-  toggleModal(previewCardModal);
-}
-
-const clickLikeButton = (element) => {
-  element.classList.toggle('photos__like-button_active');
-}
-
-const deleteCard = (element) => {
-  element.remove();
-}
-
-
 
 const validationConfig = {
   formSelector: '.popup__Form',
@@ -145,25 +136,12 @@ const validationConfig = {
 const editProfileFormValidator = new FormValidator(validationConfig, document.querySelector("#edit-profile-form"))
 editProfileFormValidator.enableValidation();
 
-function createCard(card) {
-  const cardTemplate = body.querySelector('#card-template').content.querySelector('.card');
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector('.photos__card-img');
-  const cardTitle = cardElement.querySelector('.photos__title');
-  const cardLikeButton = cardElement.querySelector('.button_type_like');
-  const cardDeleteButton = cardElement.querySelector('.button_type_delete');
-  cardImage.src = card.link;
-  cardImage.alt = card.title;
-  cardTitle.textContent = card.title;
-  cardLikeButton.addEventListener('click', (evt) => clickLikeButton(evt.target));
-  cardDeleteButton.addEventListener('click', () => deleteCard(cardElement));
-  cardImage.addEventListener('click', () => previewImage(card.link, card.title));
-  return cardElement;
-}
+const cardFormModalWindow = new FormValidator(validationConfig, addCardModal);
+cardFormModalWindow.enableValidation();
 
 const addNewCardHandler = (evt) => {
   evt.preventDefault();
-  prependCard(createCard({title: addCardModalInputTitle.value, link: addCardModalInputLink.value}), cardsContainer);
+  prependCard({title: addCardModalInputTitle.value, link: addCardModalInputLink.value}, cardsContainer);
   toggleModal(addCardModal);
 }
 
@@ -202,4 +180,4 @@ addCardModalForm.addEventListener('submit', addNewCardHandler);
 
 previewImageModalCloseBtn.addEventListener('click', () => toggleModal(previewCardModal));
 
-initialCards.forEach(card => renderCard(createCard(card), cardsContainer));
+initialCards.forEach(card => renderCard(card, cardsContainer));
