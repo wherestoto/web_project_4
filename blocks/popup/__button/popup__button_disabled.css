@@ -1,5 +1,5 @@
 .popup__button_disabled {
-  opacity: 0.2;
+  opacity: .2;
 	border: 1px solid rgba(0, 0, 0, 1);
 	box-sizing: border-box;
 	background: none;
@@ -7,5 +7,6 @@
 }
 
 .popup__button_disabled:hover {
-  opacity: 0.2;
+  opacity: .2;
+	cursor: default;
 }
