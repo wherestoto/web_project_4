@@ -28,6 +28,7 @@ New concepts implemented:
 * Transition properties for popups
 * Custom Form Validation
 * Integrating Event Handling, DOM Elements, and JavaScript Form Validation
+* Organize & modularize code following Object-Oriented Programming principles
 
 ## Updates
 
