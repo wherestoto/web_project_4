@@ -1,21 +1,4 @@
-const toggleModal = (modalWindow) => {
-  modalWindow.classList.toggle('popup_opened');
-  checkValidEscapeModal(modalWindow);
-}
-
-const checkValidEscapeModal = (modalWindow) => {
-  if (modalWindow.classList.contains('popup_opened')) {
-    document.addEventListener('keydown', escapeModal);
-  } else {
-    document.removeEventListener('keydown', escapeModal);
-  }
-}
-
-const escapeModal = (evt) => {
-  if (evt.key === 'Escape') {
-    toggleModal(document.querySelector('.popup_opened'));
-  }
-}
+import { toggleModal, previewCardModal, popupImage, previewCaption } from "./utils.js";
 
 export class Card {
   constructor(template, data) {
@@ -24,10 +7,8 @@ export class Card {
   }
   
   _getTemplate() {
-    const cardElement = this._template
+    return this._template
     .cloneNode(true);
-
-    return cardElement
   }
   
   _setEventListeners() {
@@ -45,10 +26,6 @@ export class Card {
   }
 
   _handlePreviewImage(link, title) {
-    const previewCardModal = document.querySelector('.popup_type_preview');
-    const popupImage = previewCardModal.querySelector('.popup__image');
-    const previewCaption = previewCardModal.querySelector('.popup__image-caption');
-
     popupImage.src = link;
     popupImage.alt = title;
     previewCaption.textContent = title;

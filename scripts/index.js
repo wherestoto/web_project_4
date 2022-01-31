@@ -1,6 +1,7 @@
 import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
 import { initialCards } from "./initial-cards.js";
+import { toggleModal } from "./utils.js";
 
 const body = document.querySelector('.page');
 
@@ -38,10 +39,6 @@ const addCardModalInputTitle = addCardModal.querySelector('.popup__input_type_ti
 
 const addCardModalInputLink = addCardModal.querySelector('.popup__input_type_image');
 
-const popupImage = previewCardModal.querySelector('.popup__image');
-
-const previewCaption = previewCardModal.querySelector('.popup__image-caption');
-
 const profileEditModalInputName = profileEditModal.querySelector('.popup__input_type_name');
 
 const profileEditModalInputTitle = profileEditModal.querySelector('.popup__input_type_description');
@@ -64,25 +61,6 @@ const openCardForm = () => {
   reset.resetErrorValidation(addCardModal);
   resetCardFormValidation();
   toggleModal(addCardModal);
-}
-
-const toggleModal = (modalWindow) => {
-  modalWindow.classList.toggle('popup_opened');
-  checkValidEscapeModal(modalWindow);
-}
-
-const checkValidEscapeModal = (modalWindow) => {
-  if (modalWindow.classList.contains('popup_opened')) {
-    document.addEventListener('keydown', escapeModal);
-  } else {
-    document.removeEventListener('keydown', escapeModal);
-  }
-}
-
-const escapeModal = (evt) => {
-  if (evt.key === 'Escape') {
-    toggleModal(document.querySelector('.popup_opened'));
-  }
 }
 
 const resetCardFormValidation = () => {
@@ -133,7 +111,7 @@ const validationConfig = {
   errorClass: 'popup__error_visible'
 };
 
-const editProfileFormValidator = new FormValidator(validationConfig, document.querySelector("#edit-profile-form"))
+const editProfileFormValidator = new FormValidator(validationConfig, document.querySelector("#edit-profile-form"));
 editProfileFormValidator.enableValidation();
 
 const cardFormModalWindow = new FormValidator(validationConfig, addCardModal);
