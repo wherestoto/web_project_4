@@ -4,6 +4,7 @@ export class Card {
   constructor(template, data) {
     this._template = template;
     this._data = data;
+    this._element = null;
   }
   
   _getTemplate() {
@@ -12,17 +13,22 @@ export class Card {
   }
   
   _setEventListeners() {
-    this._cardLikeButton.addEventListener('click', (evt) => this._handleLikeButton(evt.target));
-    this._cardDeleteButton.addEventListener('click', () => this._handleDeleteCard(this._element));
-    this._cardImage.addEventListener('click', () => this._handlePreviewImage(this._data.link, this._data.title));
+    this._element.querySelector('.button_type_like')
+    .addEventListener('click', this._handleLikeButton);
+
+    this._element.querySelector('.button_type_delete')
+    .addEventListener('click', this._handleDeleteCard);
+    
+    this._element.querySelector('.photos__card-img')
+    .addEventListener('click', () => this._handlePreviewImage(this._data.link, this._data.title));
   }
   
-  _handleLikeButton() {
-    this._cardLikeButton.classList.toggle('photos__like-button_active');
+  _handleLikeButton = (evt) => {
+    evt.currentTarget.classList.toggle('photos__like-button_active');
   }
   
-  _handleDeleteCard(element) {
-    element.remove();
+  _handleDeleteCard = () => {
+    this._element.remove();
   }
 
   _handlePreviewImage(link, title) {
@@ -44,7 +50,7 @@ export class Card {
     this._cardImage.src = this._data.link;
     this._cardImage.alt = this._data.title;
     this._cardTitle.textContent = this._data.title;
-
+    
     this._setEventListeners();
 
     return this._element;
