@@ -49,7 +49,7 @@ const profileSubmitButton = profileEditModalForm.querySelector('.popup__button')
 
 const openProfileForm = () => {
   const reset = new FormValidator(validationConfig, profileEditModal);
-  reset.resetErrorValidation(profileEditModal);
+  reset._resetErrorValidation(profileEditModal);
   resetProfileFormValidation();
   profileEditModalInputName.value = profileName.textContent;
   profileEditModalInputTitle.value = profileTitle.textContent;
@@ -58,7 +58,7 @@ const openProfileForm = () => {
 
 const openCardForm = () => {
   const reset = new FormValidator(validationConfig, addCardModal);
-  reset.resetErrorValidation(addCardModal);
+  reset._resetErrorValidation(addCardModal);
   resetCardFormValidation();
   toggleModal(addCardModal);
 }

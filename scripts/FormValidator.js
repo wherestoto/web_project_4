@@ -40,7 +40,7 @@ export class FormValidator {
     }
   }
   
-  resetErrorValidation(modalWindow) {
+  _resetErrorValidation(modalWindow) {
     const errorLineVisible = modalWindow.querySelectorAll('.popup__input_type_error');
     const errorTextVisible = modalWindow.querySelectorAll('.popup__error_visible');
     errorLineVisible.forEach(errorLine => {
