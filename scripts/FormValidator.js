@@ -1,3 +1,5 @@
+import {addCardModalForm, addCardSubmitButton, profileEditModalForm, profileSubmitButton} from "./initial-cards.js";
+
 export class FormValidator {
   constructor(settings, formElement) {
     this._settings = settings;
@@ -31,6 +33,8 @@ export class FormValidator {
   }
   
   _toggleButtonState(inputList, buttonElement) {
+    console.log(inputList);
+    console.log(buttonElement);
     if (this._hasInvalidInput(inputList)) {
       buttonElement.setAttribute('disabled', true);
       buttonElement.classList.add(this._settings.inactiveButtonClass);
@@ -40,7 +44,7 @@ export class FormValidator {
     }
   }
   
-  resetErrorValidation() {
+  resetValidation() {
     const errorLineVisible = this._formElement.querySelectorAll('.popup__input_type_error');
     const errorTextVisible = this._formElement.querySelectorAll('.popup__error_visible');
     
@@ -50,6 +54,24 @@ export class FormValidator {
     errorTextVisible.forEach(errorText => {
       errorText.textContent = '';
     });
+
+    // this._resetCardFormValidation();
+    addCardModalForm.reset();
+    this._disableSubmitButton(addCardSubmitButton);
+
+    // this._resetProfileFormValidation();
+    profileEditModalForm.reset();
+    this._enableSubmitButton(profileSubmitButton);
+  }
+
+  _disableSubmitButton(buttonElement) {
+    buttonElement.setAttribute('disabled', true);
+    buttonElement.classList.add(this._settings.inactiveButtonClass);
+  }
+  
+  _enableSubmitButton(buttonElement) {
+    buttonElement.removeAttribute('disabled');
+    buttonElement.classList.remove(this._settings.inactiveButtonClass);
   }
   
   _setEventListeners() {
@@ -60,6 +82,7 @@ export class FormValidator {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement, this._settings);
         this._toggleButtonState(inputList, buttonElement, this._settings);
+        console.log("inputList: ", inputList);
       });
     });
   }

@@ -17,9 +17,9 @@ const addCardModal = body.querySelector('.popup_type_add-card');
 
 const previewCardModal = body.querySelector('.popup_type_preview');
 
-const profileEditModalForm = profileEditModal.querySelector('.popup__form');
+export const profileEditModalForm = profileEditModal.querySelector('.popup__form');
 
-const addCardModalForm = addCardModal.querySelector('.popup__form');
+export const addCardModalForm = addCardModal.querySelector('.popup__form');
 
 const profileEditBtn = profile.querySelector('.profile__edit-button');
 
@@ -43,14 +43,13 @@ const profileEditModalInputName = profileEditModal.querySelector('.popup__input_
 
 const profileEditModalInputTitle = profileEditModal.querySelector('.popup__input_type_description');
 
-const addCardSubmitButton = addCardModalForm.querySelector('.popup__button');
+export const addCardSubmitButton = addCardModalForm.querySelector('.popup__button');
 
-const profileSubmitButton = profileEditModalForm.querySelector('.popup__button');
+export const profileSubmitButton = profileEditModalForm.querySelector('.popup__button');
 
 const openProfileForm = () => {
   const profileFormValidator = new FormValidator(validationConfig, profileEditModal);
-  profileFormValidator.resetErrorValidation();
-  resetProfileFormValidation();
+  profileFormValidator.resetValidation();
   profileEditModalInputName.value = profileName.textContent;
   profileEditModalInputTitle.value = profileTitle.textContent;
   toggleModal(profileEditModal);
@@ -58,29 +57,8 @@ const openProfileForm = () => {
 
 const openCardForm = () => {
   const cardFormValidator = new FormValidator(validationConfig, addCardModal);
-  cardFormValidator.resetErrorValidation();
-  resetCardFormValidation();
+  cardFormValidator.resetValidation();
   toggleModal(addCardModal);
-}
-
-const resetCardFormValidation = () => {
-  addCardModalForm.reset();
-  disableSubmitButton(addCardSubmitButton);
-}
-
-const disableSubmitButton = buttonElement => {
-  buttonElement.setAttribute('disabled', true);
-  buttonElement.classList.add('popup__button_disabled');
-}
-
-const resetProfileFormValidation = () => {
-  profileEditModalForm.reset();
-  enableSubmitButton(profileSubmitButton);
-}
-
-const enableSubmitButton = buttonElement => {
-  buttonElement.removeAttribute('disabled');
-  buttonElement.classList.remove('popup__button_disabled');
 }
 
 const submitProfileHandler = (evt) => {
@@ -111,7 +89,8 @@ const validationConfig = {
   errorClass: 'popup__error_visible'
 };
 
-const editProfileFormValidator = new FormValidator(validationConfig, document.querySelector("#edit-profile-form"));
+const editProfileForm = document.querySelector("#edit-profile-form");
+const editProfileFormValidator = new FormValidator(validationConfig, editProfileForm);
 editProfileFormValidator.enableValidation();
 
 const cardFormModalWindow = new FormValidator(validationConfig, addCardModal);
@@ -133,12 +112,12 @@ const setOverlayEventListener = (modalElement, settings) => {
   modalElement.addEventListener('click', (evt) => checkContainer(evt, settings));
 }
 
-const clickModalOverlay = (settings) => {
+const addRemoteClickListeners = (settings) => {
   const modalList = Array.from(document.querySelectorAll(settings.modalParentSelector));
   modalList.forEach(modalElement => setOverlayEventListener(modalElement, settings));
 }
 
-clickModalOverlay({
+addRemoteClickListeners({
   containerSelector: '.popup__container',
   modalParentSelector: '.popup',
   openModalClass: 'popup_opened'
@@ -159,3 +138,5 @@ addCardModalForm.addEventListener('submit', addNewCardHandler);
 previewImageModalCloseBtn.addEventListener('click', () => toggleModal(previewCardModal));
 
 initialCards.forEach(card => renderCard(card, cardsContainer));
+
+export default {addCardModalForm, addCardSubmitButton, profileEditModalForm, profileSubmitButton};
