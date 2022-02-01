@@ -103,7 +103,7 @@ const prependCard = (element, container) => {
 }
 
 const validationConfig = {
-  formSelector: '.popup__Form',
+  formSelector: '.popup__form',
   inputSelector: '.popup__input', 
   submitButtonSelector: '.popup__button', 
   inactiveButtonClass: 'popup__button_disabled',
