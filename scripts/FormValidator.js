@@ -1,4 +1,4 @@
-import {addCardModalForm, addCardSubmitButton, profileEditModalForm, profileSubmitButton} from "./initial-cards.js";
+import {addCardModalForm, addCardSubmitButton, profileEditModalForm, profileSubmitButton} from "./index.js";
 
 export class FormValidator {
   constructor(settings, formElement) {
