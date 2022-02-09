@@ -55,21 +55,23 @@ export class FormValidator {
       errorText.textContent = '';
     });
 
-    // this._resetCardFormValidation();
+    // deprecated this._resetCardFormValidation();
     addCardModalForm.reset();
     this._disableSubmitButton(addCardSubmitButton);
 
-    // this._resetProfileFormValidation();
+    // deprecated this._resetProfileFormValidation();
     profileEditModalForm.reset();
     this._enableSubmitButton(profileSubmitButton);
   }
 
   _disableSubmitButton(buttonElement) {
+    // use this._toggleButtonState(); //However, inputList error at line 31
     buttonElement.setAttribute('disabled', true);
     buttonElement.classList.add(this._settings.inactiveButtonClass);
   }
   
   _enableSubmitButton(buttonElement) {
+    // use this._toggleButtonState(); //However, inputList error at line 31
     buttonElement.removeAttribute('disabled');
     buttonElement.classList.remove(this._settings.inactiveButtonClass);
   }
