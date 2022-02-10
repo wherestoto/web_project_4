@@ -33,33 +33,22 @@ export class FormValidator {
   }
   
   _toggleButtonState(inputList, buttonElement) {
-    console.log(inputList);
-    console.log(buttonElement);
     if (this._hasInvalidInput(inputList)) {
-      buttonElement.setAttribute('disabled', true);
-      buttonElement.classList.add(this._settings.inactiveButtonClass);
+      this._disableSubmitButton(buttonElement);
     } else {
-      buttonElement.removeAttribute('disabled');
-      buttonElement.classList.remove(this._settings.inactiveButtonClass);
+      this._enableSubmitButton(buttonElement);
     }
   }
   
   resetValidation() {
-    const errorLineVisible = this._formElement.querySelectorAll('.popup__input_type_error');
-    const errorTextVisible = this._formElement.querySelectorAll('.popup__error_visible');
-    
-    errorLineVisible.forEach(errorLine => {
-      this._hideInputError(errorLine);
-    });
-    errorTextVisible.forEach(errorText => {
-      errorText.textContent = '';
-    });
+  [
+    ...this._formElement.querySelectorAll(this._settings.inputSelector),
+  ].forEach(input => this._hideInputError(input));
 
-    // deprecated this._resetCardFormValidation();
+    // reset this._formElement instead of individual forms
     addCardModalForm.reset();
-    this._disableSubmitButton(addCardSubmitButton);
+    this._disableSubmitButton(this._formElement.querySelector(this._settings.submitButtonSelector));
 
-    // deprecated this._resetProfileFormValidation();
     profileEditModalForm.reset();
     this._enableSubmitButton(profileSubmitButton);
   }
@@ -84,7 +73,6 @@ export class FormValidator {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement, this._settings);
         this._toggleButtonState(inputList, buttonElement, this._settings);
-        console.log("inputList: ", inputList);
       });
     });
   }
