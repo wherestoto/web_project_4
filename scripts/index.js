@@ -48,16 +48,14 @@ export const addCardSubmitButton = addCardModalForm.querySelector('.popup__butto
 export const profileSubmitButton = profileEditModalForm.querySelector('.popup__button');
 
 const openProfileForm = () => {
-  const profileFormValidator = new FormValidator(validationConfig, profileEditModal);
-  profileFormValidator.resetValidation();
+  editProfileFormValidator.resetValidation();
   profileEditModalInputName.value = profileName.textContent;
   profileEditModalInputTitle.value = profileTitle.textContent;
   toggleModal(profileEditModal);
 }
 
 const openCardForm = () => {
-  const cardFormValidator = new FormValidator(validationConfig, addCardModal);
-  cardFormValidator.resetValidation();
+  addCardFormValidator.resetValidation();
   toggleModal(addCardModal);
 }
 
@@ -93,8 +91,8 @@ const editProfileForm = document.querySelector("#edit-profile-form");
 const editProfileFormValidator = new FormValidator(validationConfig, editProfileForm);
 editProfileFormValidator.enableValidation();
 
-const cardFormModalWindow = new FormValidator(validationConfig, addCardModal);
-cardFormModalWindow.enableValidation();
+const addCardFormValidator = new FormValidator(validationConfig, addCardModal);
+addCardFormValidator.enableValidation();
 
 const addNewCardHandler = (evt) => {
   evt.preventDefault();
