@@ -34,6 +34,7 @@ export class FormValidator {
   
   _toggleButtonState(inputList, buttonElement) {
     if (this._hasInvalidInput(inputList)) {
+      console.log(this._hasInvalidInput(inputList));
       this._disableSubmitButton(buttonElement);
     } else {
       this._enableSubmitButton(buttonElement);
@@ -44,23 +45,29 @@ export class FormValidator {
   [
     ...this._formElement.querySelectorAll(this._settings.inputSelector),
   ].forEach(input => this._hideInputError(input));
+  
+  [
+    ...this._formElement.querySelectorAll(this._settings.formSelector),
+  ].forEach(form => form.reset());
+  
+  this._resetSubmitButton();
+  
+  // Notes:
+  // this._formElement.querySelectorAll(this._settings.submitButtonSelector); //'.popup__button'
+  // this._formElement.querySelectorAll(this._settings.inactiveButtonClass); //'popup__button_diabled'
+}
 
-    // reset this._formElement instead of individual forms
-    addCardModalForm.reset();
-    this._disableSubmitButton(this._formElement.querySelector(this._settings.submitButtonSelector));
-
-    profileEditModalForm.reset();
+_resetSubmitButton() {
+    this._disableSubmitButton(addCardSubmitButton);
     this._enableSubmitButton(profileSubmitButton);
   }
-
+  
   _disableSubmitButton(buttonElement) {
-    // use this._toggleButtonState(); //However, inputList error at line 31
     buttonElement.setAttribute('disabled', true);
     buttonElement.classList.add(this._settings.inactiveButtonClass);
   }
   
   _enableSubmitButton(buttonElement) {
-    // use this._toggleButtonState(); //However, inputList error at line 31
     buttonElement.removeAttribute('disabled');
     buttonElement.classList.remove(this._settings.inactiveButtonClass);
   }
