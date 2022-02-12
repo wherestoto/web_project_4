@@ -48,7 +48,7 @@ export const addCardSubmitButton = addCardModalForm.querySelector('.popup__butto
 export const profileSubmitButton = profileEditModalForm.querySelector('.popup__button');
 
 const openProfileForm = () => {
-  editProfileFormValidator.resetValidation();
+  // editProfileFormValidator.resetValidation();
   profileEditModalInputName.value = profileName.textContent;
   profileEditModalInputTitle.value = profileTitle.textContent;
   toggleModal(profileEditModal);
@@ -87,8 +87,7 @@ const validationConfig = {
   errorClass: 'popup__error_visible'
 };
 
-const editProfileForm = document.querySelector("#edit-profile-form");
-const editProfileFormValidator = new FormValidator(validationConfig, editProfileForm);
+const editProfileFormValidator = new FormValidator(validationConfig, profileEditModal);
 editProfileFormValidator.enableValidation();
 
 const addCardFormValidator = new FormValidator(validationConfig, addCardModal);

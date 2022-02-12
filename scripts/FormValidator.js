@@ -34,7 +34,6 @@ export class FormValidator {
   
   _toggleButtonState(inputList, buttonElement) {
     if (this._hasInvalidInput(inputList)) {
-      console.log(this._hasInvalidInput(inputList));
       this._disableSubmitButton(buttonElement);
     } else {
       this._enableSubmitButton(buttonElement);
@@ -42,22 +41,35 @@ export class FormValidator {
   }
   
   resetValidation() {
-  [
-    ...this._formElement.querySelectorAll(this._settings.inputSelector),
-  ].forEach(input => this._hideInputError(input));
-  
-  [
-    ...this._formElement.querySelectorAll(this._settings.formSelector),
-  ].forEach(form => form.reset());
-  
-  this._resetSubmitButton();
-  
-  // Notes:
-  // this._formElement.querySelectorAll(this._settings.submitButtonSelector); //'.popup__button'
-  // this._formElement.querySelectorAll(this._settings.inactiveButtonClass); //'popup__button_diabled'
-}
+    /* Code 1 for hiding error messages */
+    // [
+    //   ...this._formElement.querySelectorAll(this._settings.inputSelector),
+    // ].forEach(input => this._hideInputError(input));
 
-_resetSubmitButton() {
+    /* Code 2 for hiding error messages */
+    const invalidInputs = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
+    const buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector);
+
+    invalidInputs.forEach(input => {
+      this._hideInputError(input);
+    })
+    
+    /* Code for Resetting Current Form */
+    this._formElement.querySelector(this._settings.formSelector).reset();
+    
+    /* Code for resetting submit buttons on profile edit form and new card form */
+    // does not work... if card is disabled, profile is also disabled...
+    this._toggleButtonState(invalidInputs, buttonElement, this._settings); 
+    
+    /* Specifically targets each submit button by using class names */
+    // this._resetSubmitButton();
+    
+    // Reference Notes:
+    // this._formElement.querySelectorAll(this._settings.submitButtonSelector); //'.popup__button'
+    // this._formElement.querySelectorAll(this._settings.inactiveButtonClass); //'popup__button_disabled'
+  }
+
+  _resetSubmitButton() {
     this._disableSubmitButton(addCardSubmitButton);
     this._enableSubmitButton(profileSubmitButton);
   }
@@ -82,6 +94,7 @@ _resetSubmitButton() {
         this._toggleButtonState(inputList, buttonElement, this._settings);
       });
     });
+   
   }
   
   enableValidation() {
