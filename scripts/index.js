@@ -17,9 +17,9 @@ const addCardModal = body.querySelector('.popup_type_add-card');
 
 const previewCardModal = body.querySelector('.popup_type_preview');
 
-export const profileEditModalForm = profileEditModal.querySelector('.popup__form');
+const profileEditModalForm = profileEditModal.querySelector('.popup__form');
 
-export const addCardModalForm = addCardModal.querySelector('.popup__form');
+const addCardModalForm = addCardModal.querySelector('.popup__form');
 
 const profileEditBtn = profile.querySelector('.profile__edit-button');
 
@@ -43,16 +43,32 @@ const profileEditModalInputName = profileEditModal.querySelector('.popup__input_
 
 const profileEditModalInputTitle = profileEditModal.querySelector('.popup__input_type_description');
 
-export const addCardSubmitButton = addCardModalForm.querySelector('.popup__button');
+const addCardSubmitButton = addCardModalForm.querySelector('.popup__button');
 
-export const profileSubmitButton = profileEditModalForm.querySelector('.popup__button');
+const profileSubmitButton = profileEditModalForm.querySelector('.popup__button');
+
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input', 
+  submitButtonSelector: '.popup__button', 
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+const editProfileFormValidator = new FormValidator(validationConfig, profileEditModal);
+editProfileFormValidator.enableValidation();
 
 const openProfileForm = () => {
-  // editProfileFormValidator.resetValidation();
+  editProfileFormValidator.resetValidation();
+  editProfileFormValidator.enableSubmitButton(profileSubmitButton);
   profileEditModalInputName.value = profileName.textContent;
   profileEditModalInputTitle.value = profileTitle.textContent;
   toggleModal(profileEditModal);
 }
+
+const addCardFormValidator = new FormValidator(validationConfig, addCardModal);
+addCardFormValidator.enableValidation();
 
 const openCardForm = () => {
   addCardFormValidator.resetValidation();
@@ -77,21 +93,6 @@ const prependCard = (element, container) => {
 
   container.prepend(card.generateCard());
 }
-
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input', 
-  submitButtonSelector: '.popup__button', 
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
-
-const editProfileFormValidator = new FormValidator(validationConfig, profileEditModal);
-editProfileFormValidator.enableValidation();
-
-const addCardFormValidator = new FormValidator(validationConfig, addCardModal);
-addCardFormValidator.enableValidation();
 
 const addNewCardHandler = (evt) => {
   evt.preventDefault();
@@ -135,5 +136,3 @@ addCardModalForm.addEventListener('submit', addNewCardHandler);
 previewImageModalCloseBtn.addEventListener('click', () => toggleModal(previewCardModal));
 
 initialCards.forEach(card => renderCard(card, cardsContainer));
-
-export default {addCardModalForm, addCardSubmitButton, profileEditModalForm, profileSubmitButton};

@@ -1,5 +1,3 @@
-import {addCardModalForm, addCardSubmitButton, profileEditModalForm, profileSubmitButton} from "./index.js";
-
 export class FormValidator {
   constructor(settings, formElement) {
     this._settings = settings;
@@ -32,76 +30,52 @@ export class FormValidator {
     return inputList.some(inputElement => !inputElement.validity.valid);
   }
   
-  _toggleButtonState(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
-      this._disableSubmitButton(buttonElement);
+  _disableSubmitButton() {
+    this._buttonElement.setAttribute('disabled', true);
+    this._buttonElement.classList.add(this._settings.inactiveButtonClass);
+  }
+  
+  enableSubmitButton() {
+    this._buttonElement.removeAttribute('disabled');
+    this._buttonElement.classList.remove(this._settings.inactiveButtonClass);
+  }
+
+  _toggleButtonState() {
+    if (this._hasInvalidInput(this._inputList)) {
+      this._disableSubmitButton();
     } else {
-      this._enableSubmitButton(buttonElement);
+      this.enableSubmitButton();
     }
   }
   
   resetValidation() {
-    /* Code 1 for hiding error messages */
-    // [
-    //   ...this._formElement.querySelectorAll(this._settings.inputSelector),
-    // ].forEach(input => this._hideInputError(input));
-
-    /* Code 2 for hiding error messages */
-    const invalidInputs = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
-    const buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector);
-
-    invalidInputs.forEach(input => {
+    this._inputList.forEach(input => {
       this._hideInputError(input);
     })
     
-    /* Code for Resetting Current Form */
     this._formElement.querySelector(this._settings.formSelector).reset();
-    
-    /* Code for resetting submit buttons on profile edit form and new card form */
-    // does not work... if card is disabled, profile is also disabled...
-    this._toggleButtonState(invalidInputs, buttonElement, this._settings); 
-    
-    /* Specifically targets each submit button by using class names */
-    // this._resetSubmitButton();
-    
-    // Reference Notes:
-    // this._formElement.querySelectorAll(this._settings.submitButtonSelector); //'.popup__button'
-    // this._formElement.querySelectorAll(this._settings.inactiveButtonClass); //'popup__button_disabled'
+
+    this._toggleButtonState();
   }
 
-  _resetSubmitButton() {
-    this._disableSubmitButton(addCardSubmitButton);
-    this._enableSubmitButton(profileSubmitButton);
-  }
-  
-  _disableSubmitButton(buttonElement) {
-    buttonElement.setAttribute('disabled', true);
-    buttonElement.classList.add(this._settings.inactiveButtonClass);
-  }
-  
-  _enableSubmitButton(buttonElement) {
-    buttonElement.removeAttribute('disabled');
-    buttonElement.classList.remove(this._settings.inactiveButtonClass);
-  }
-  
   _setEventListeners() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
-    const buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector);
-
-    inputList.forEach(inputElement => {
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._settings.inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._settings.submitButtonSelector);
+    
+    this._inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
-        this._checkInputValidity(inputElement, this._settings);
-        this._toggleButtonState(inputList, buttonElement, this._settings);
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState(); 
       });
     });
-   
   }
   
   enableValidation() {
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
+      this._toggleButtonState();
     });
-    this._setEventListeners(this._settings);
+    this._setEventListeners();
   }
 }
 
