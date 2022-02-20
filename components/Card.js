@@ -1,5 +1,6 @@
-import toggleModal from "../utils/utils.js";
-import { previewCardModal, popupImage, previewCaption } from "../utils/constants.js";
+import { previewPopup, popupImage, previewCaption } from "../utils/constants.js";
+import Popup from "./Popup.js";
+import { popupConfig } from "../pages/index.js";
 
 export class Card {
   constructor(template, data) {
@@ -37,7 +38,8 @@ export class Card {
     popupImage.alt = title;
     previewCaption.textContent = title;
 
-    toggleModal(previewCardModal);
+    const openPreview = new Popup(popupConfig, previewPopup);
+    openPreview.open(previewPopup);
 }
   
   generateCard() {
