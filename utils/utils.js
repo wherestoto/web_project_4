@@ -1,9 +1,4 @@
 // utils.js will contain the event handlers and the function that opens/closes modal windows
-
-const previewCardModal = document.querySelector('.popup_type_preview');
-const popupImage = previewCardModal.querySelector('.popup__image');
-const previewCaption = previewCardModal.querySelector('.popup__image-caption');
-
 const toggleModal = (modalWindow) => {
   modalWindow.classList.toggle('popup_opened');
   checkValidEscapeModal(modalWindow);
@@ -23,4 +18,4 @@ const escapeModal = (evt) => {
   }
 }
 
-export { toggleModal, previewCardModal, popupImage, previewCaption }; 
+export default toggleModal;

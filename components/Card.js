@@ -1,4 +1,5 @@
-import { toggleModal, previewCardModal, popupImage, previewCaption } from "./utils.js";
+import toggleModal from "../utils/utils.js";
+import { previewCardModal, popupImage, previewCaption } from "../utils/constants.js";
 
 export class Card {
   constructor(template, data) {
