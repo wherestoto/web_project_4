@@ -1,30 +1,29 @@
-import FormValidator from "../components/FormValidator.js";
-import { Card } from "../components/Card.js";
-import { initialCards } from "../utils/initial-cards.js";
-import toggleModal from "../utils/utils.js";
-import Section from "../components/Section.js";
 import {
   profileEditModal,
+  profilePopupSelector,
   cardsContainer,
   cardListSection,
   cardTemplate,
   addCardModal,
-  previewCardModal,
+  addCardFormPopup,
   profileEditModalForm,
   addCardModalForm,
   profileEditBtn,
-  profileCloseBtn,
   placesAddBtn,
-  addCardModalCloseBtn,
-  previewImageModalCloseBtn,
   profileName,
   profileTitle,
   addCardModalInputTitle,
   addCardModalInputLink,
   profileEditModalInputName,
   profileEditModalInputTitle,
-  profileSubmitButton
+  profileSubmitButton,
+  previewPopup
 } from "../utils/constants.js";
+import FormValidator from "../components/FormValidator.js";
+import { Card } from "../components/Card.js";
+import { initialCards } from "../utils/initial-cards.js";
+import Section from "../components/Section.js";
+import Popup from "../components/Popup.js";
 
 const validationConfig = {
   formSelector: '.popup__form',
@@ -35,30 +34,42 @@ const validationConfig = {
   errorClass: 'popup__error_visible'
 };
 
+export const popupConfig = {
+  containerSelector: '.popup__container',
+  modalParentSelector: '.popup',
+  openModalClass: 'popup_opened'
+};
+
 const editProfileFormValidator = new FormValidator(validationConfig, profileEditModal);
 editProfileFormValidator.enableValidation();
+
+const openProfilePopup = new Popup(popupConfig, profilePopupSelector);
+openProfilePopup.setEventListeners();
 
 const openProfileForm = () => {
   editProfileFormValidator.resetValidation();
   editProfileFormValidator.enableSubmitButton(profileSubmitButton);
   profileEditModalInputName.value = profileName.textContent;
   profileEditModalInputTitle.value = profileTitle.textContent;
-  toggleModal(profileEditModal);
-}
-
-const addCardFormValidator = new FormValidator(validationConfig, addCardModal);
-addCardFormValidator.enableValidation();
-
-const openCardForm = () => {
-  addCardFormValidator.resetValidation();
-  toggleModal(addCardModal);
+  openProfilePopup.open();
 }
 
 const submitProfileHandler = (evt) => {
   evt.preventDefault();
   profileName.textContent = profileEditModalInputName.value;
   profileTitle.textContent = profileEditModalInputTitle.value;
-  toggleModal(profileEditModal);
+  openProfilePopup.open();
+}
+
+const addCardFormValidator = new FormValidator(validationConfig, addCardModal);
+addCardFormValidator.enableValidation();
+
+const addCardForm = new Popup(popupConfig, addCardFormPopup); //.popup_type_add-card
+addCardForm.setEventListeners();
+
+const openCardForm = () => {
+  addCardFormValidator.resetValidation();
+  addCardForm.open();
 }
 
 const prependCard = (element, container) => {
@@ -69,44 +80,9 @@ const prependCard = (element, container) => {
 
 const addNewCardHandler = (evt) => {
   evt.preventDefault();
-  prependCard({title: addCardModalInputTitle.value, link: addCardModalInputLink.value}, cardsContainer);
-  toggleModal(addCardModal);
+  prependCard({ title: addCardModalInputTitle.value, link: addCardModalInputLink.value }, cardsContainer);
+  addCardForm.close();
 }
-
-const checkContainer = (evt, settings) => {
-  if (!evt.target.closest(settings.containerSelector)) {
-    evt.currentTarget.closest(settings.modalParentSelector).classList.remove(settings.openModalClass);
-  };
-}
-
-const setOverlayEventListener = (modalElement, settings) => {
-  modalElement.addEventListener('click', (evt) => checkContainer(evt, settings));
-}
-
-const addRemoteClickListeners = (settings) => {
-  const modalList = Array.from(document.querySelectorAll(settings.modalParentSelector));
-  modalList.forEach(modalElement => setOverlayEventListener(modalElement, settings));
-}
-
-addRemoteClickListeners({
-  containerSelector: '.popup__container',
-  modalParentSelector: '.popup',
-  openModalClass: 'popup_opened'
-})
-
-profileEditBtn.addEventListener('click', openProfileForm);
-
-profileCloseBtn.addEventListener('click', () => toggleModal(profileEditModal));
-
-profileEditModalForm.addEventListener('submit', submitProfileHandler);
-
-placesAddBtn.addEventListener('click', openCardForm);
-
-addCardModalCloseBtn.addEventListener('click', () => toggleModal(addCardModal));
-
-addCardModalForm.addEventListener('submit', addNewCardHandler);
-
-previewImageModalCloseBtn.addEventListener('click', () => toggleModal(previewCardModal));
 
 // initiate Section class here to render this card section
 const defaultCardList = new Section({
@@ -116,7 +92,15 @@ const defaultCardList = new Section({
     const cardElement = card.generateCard();
     defaultCardList.addItem(cardElement);
   }
-},
-cardListSection);
+}, cardListSection);
 
 defaultCardList.renderer();
+
+/* Event Listeners */
+profileEditModalForm.addEventListener('submit', submitProfileHandler);
+
+addCardModalForm.addEventListener('submit', addNewCardHandler);
+
+profileEditBtn.addEventListener('click', openProfileForm);
+
+placesAddBtn.addEventListener('click', openCardForm);

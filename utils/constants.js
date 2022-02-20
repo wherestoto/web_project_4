@@ -3,6 +3,7 @@ const body = document.querySelector('.page');
 const profile = body.querySelector('.profile');
 
 const profileEditModal = body.querySelector('.popup_type_edit-profile');
+const profilePopupSelector = '.popup_type_edit-profile';
 
 const cardsContainer = body.querySelector('.photos__card-grid');
 const cardListSection = '.photos__card-grid';
@@ -10,8 +11,10 @@ const cardListSection = '.photos__card-grid';
 const cardTemplate = body.querySelector('#card-template').content.querySelector('.card');
 
 const addCardModal = body.querySelector('.popup_type_add-card');
+const addCardFormPopup = '.popup_type_add-card';
 
 const previewCardModal = body.querySelector('.popup_type_preview');
+const previewPopup = '.popup_type_preview';
 
 const profileEditModalForm = profileEditModal.querySelector('.popup__form');
 
@@ -51,10 +54,12 @@ export {
   body,
   profile,
   profileEditModal,
+  profilePopupSelector,
   cardsContainer,
   cardListSection,
   cardTemplate,
   addCardModal,
+  addCardFormPopup,
   profileEditModalForm,
   addCardModalForm,
   profileEditBtn,
@@ -71,6 +76,7 @@ export {
   addCardSubmitButton,
   profileSubmitButton,
   previewCardModal,
+  previewPopup,
   popupImage,
   previewCaption
 };
