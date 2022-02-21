@@ -50,6 +50,8 @@ const popupImage = previewCardModal.querySelector('.popup__image');
 
 const previewCaption = previewCardModal.querySelector('.popup__image-caption');
 
+const cardImage = document.querySelector('.photos__card-img');
+
 export {
   body,
   profile,
@@ -78,5 +80,6 @@ export {
   previewCardModal,
   previewPopup,
   popupImage,
-  previewCaption
+  previewCaption,
+  cardImage
 };

@@ -38,9 +38,9 @@ export class Card {
     popupImage.alt = title;
     previewCaption.textContent = title;
 
-    const openPreview = new Popup(popupConfig, previewPopup);
+    const openPreview = new Popup(previewPopup);
     openPreview.open(previewPopup);
-}
+  }
   
   generateCard() {
     this._element = this._getTemplate();

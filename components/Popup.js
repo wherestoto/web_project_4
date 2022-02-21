@@ -1,7 +1,6 @@
 export default class Popup {
-  constructor(settings, popupSelector) {
+  constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
-    this._settings = settings;
   }
 
   // It stores the public methods `open()` and `close()` that will open and close the popup.
@@ -22,8 +21,8 @@ export default class Popup {
   }
   
   _checkOverlayContainer = (evt) => {
-    if (!evt.target.closest(this._settings.containerSelector)) {
-      evt.currentTarget.closest(this._settings.modalParentSelector).classList.remove(this._settings.openModalClass);
+    if (!evt.target.closest('.popup__container')) {
+      evt.currentTarget.closest('.popup').classList.remove('popup_opened');
     };
   }
   
@@ -32,7 +31,7 @@ export default class Popup {
     this._popup.querySelector('.popup__close-button').addEventListener('click', this.close);
     
     // set overlay event listener:
-    this._popupList = Array.from(document.querySelectorAll(this._settings.modalParentSelector));
+    this._popupList = Array.from(document.querySelectorAll('.popup'));
     this._popupList.forEach(modalElement => {
       modalElement.addEventListener('click', this._checkOverlayContainer)
     });
