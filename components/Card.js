@@ -1,6 +1,7 @@
 import { previewPopup, popupImage, previewCaption } from "../utils/constants.js";
 import Popup from "./Popup.js";
 import { popupConfig } from "../pages/index.js";
+import PopupWithImage from "./PopupWithImage.js";
 
 export class Card {
   constructor(template, data) {
@@ -34,12 +35,12 @@ export class Card {
   }
 
   _handlePreviewImage(link, title) {
-    popupImage.src = link;
-    popupImage.alt = title;
-    previewCaption.textContent = title;
+    // popupImage.src = link;
+    // popupImage.alt = title;
+    // previewCaption.textContent = title;
 
-    const openPreview = new Popup(previewPopup);
-    openPreview.open(previewPopup);
+    const openPreview = new PopupWithImage(this._element.querySelector('.photos__card-img'), previewPopup);
+    openPreview.open();
   }
   
   generateCard() {

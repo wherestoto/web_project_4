@@ -72,8 +72,6 @@ addCardFormValidator.enableValidation();
 const addCardForm = new Popup(addCardFormPopup); //.popup_type_add-card
 addCardForm.setEventListeners();
 
-
-
 const prependCard = (element, container) => {
   const card = new Card(cardTemplate, element);
 
@@ -86,8 +84,8 @@ const addNewCardHandler = (evt) => {
   addCardForm.close();
 }
 
-const openPreview = new PopupWithImage(previewPopup);
-openPreview.setEventListeners();
+// const openPreview = new PopupWithImage(previewPopup);
+// openPreview.setEventListeners();
 
 // initiate Section class here to render this card section
 const defaultCardList = new Section({
