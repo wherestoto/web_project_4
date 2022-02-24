@@ -23,7 +23,7 @@ export class Card {
     .addEventListener('click', this._handleDeleteCard);
     
     this._element.querySelector('.photos__card-img')
-    .addEventListener('click', () => this._handlePreviewImage(this._data.link, this._data.title));
+    .addEventListener('click', this._handlePreviewImage);
   }
   
   _handleLikeButton = (evt) => {
@@ -34,7 +34,7 @@ export class Card {
     this._element.remove();
   }
 
-  _handlePreviewImage(link, title) {
+  _handlePreviewImage = () => {
     // popupImage.src = link;
     // popupImage.alt = title;
     // previewCaption.textContent = title;
