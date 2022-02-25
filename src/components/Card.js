@@ -1,7 +1,5 @@
-import { previewPopup, popupImage, previewCaption } from "../utils/constants.js";
-import Popup from "./Popup.js";
-import { popupConfig } from "../pages/index.js";
-import PopupWithImage from "./PopupWithImage.js";
+import { previewPopup, popupImage, previewCaption } from "../utils/constants";
+import PopupWithImage from "./PopupWithImage";
 
 export class Card {
   constructor(template, data) {
@@ -35,6 +33,7 @@ export class Card {
   }
 
   _handlePreviewImage = () => {
+    /* moving to separate class */
     // popupImage.src = link;
     // popupImage.alt = title;
     // previewCaption.textContent = title;

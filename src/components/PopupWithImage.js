@@ -1,5 +1,5 @@
-import { popupImage, previewCaption } from "../utils/constants.js";
-import Popup from "./Popup.js";
+import { popupImage, previewCaption } from "../utils/constants";
+import Popup from "./Popup";
 
 // Create the `PopupWithImage` class as a child class of `Popup`.
 export default class PopupWithImage extends Popup {

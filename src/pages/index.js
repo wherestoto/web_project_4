@@ -21,14 +21,14 @@ import {
   previewCaption,
   previewPopup,
   cardImage
-} from "../utils/constants.js";
-import FormValidator from "../components/FormValidator.js";
-import { Card } from "../components/Card.js";
-import { initialCards } from "../utils/initial-cards.js";
-import Section from "../components/Section.js";
-import Popup from "../components/Popup.js";
-import PopupWithImage from "../components/PopupWithImage.js";
-// import PopupWithForms from "../components/PopupWithForms.js";
+} from "../utils/constants";
+import FormValidator from "../components/FormValidator";
+import { Card } from "../components/Card";
+import { initialCards } from "../utils/initial-cards";
+import Section from "../components/Section";
+import Popup from "../components/Popup";
+// import PopupWithImage from "../components/PopupWithImage.js";
+// import PopupWithForms from "./components/PopupWithForms.js";
 
 const validationConfig = {
   formSelector: '.popup__form',
