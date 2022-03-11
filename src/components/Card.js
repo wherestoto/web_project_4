@@ -1,11 +1,12 @@
-import { previewPopup, popupImage, previewCaption } from "../utils/constants";
+import { previewPopup } from "../utils/constants";
 import PopupWithImage from "./PopupWithImage";
 
 export class Card {
-  constructor(template, data) {
-    this._template = template;
+  constructor(data, template, { handlePreviewImage }) {
+    this._template = template; //const cardTemplate = body.querySelector('#card-template').content.querySelector('.card');
     this._data = data;
     this._element = null;
+    this._handlePreviewImage = handlePreviewImage;
   }
   
   _getTemplate() {
@@ -22,6 +23,7 @@ export class Card {
     
     this._element.querySelector('.photos__card-img')
     .addEventListener('click', this._handlePreviewImage);
+    console.log("this._data from Card.js: ", this._data);
   }
   
   _handleLikeButton = (evt) => {
@@ -32,18 +34,10 @@ export class Card {
     this._element.remove();
   }
 
-  _handlePreviewImage = () => {
-    /* moving to separate class */
-    // popupImage.src = link;
-    // popupImage.alt = title;
-    // previewCaption.textContent = title;
-
-    const openPreview = new PopupWithImage(this._element.querySelector('.photos__card-img'), previewPopup);
-    openPreview.open();
-  }
-  
   generateCard() {
     this._element = this._getTemplate();
+    console.log(this._element);
+    console.log(this._getTemplate());
 
     this._cardLikeButton = this._element.querySelector('.button_type_like');
     this._cardDeleteButton = this._element.querySelector('.button_type_delete');
