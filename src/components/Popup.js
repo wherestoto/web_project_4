@@ -3,11 +3,9 @@ export default class Popup {
     this._popup = document.querySelector(popupSelector);
   }
 
-  // It stores the public methods `open()` and `close()` that will open and close the popup.
   open() {
     this._popup.classList.add('popup_opened');
     this.setEventListeners();
-    console.log("Popup Class open() worked this._popup: ", this._popup);
   }
   
   close = () => {
@@ -32,6 +30,7 @@ export default class Popup {
     
     // set overlay event listener:
     this._popupList = Array.from(document.querySelectorAll('.popup'));
+
     this._popupList.forEach(modalElement => {
       modalElement.addEventListener('click', this._checkOverlayContainer)
     });
