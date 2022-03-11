@@ -1,23 +1,39 @@
+export const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input', 
+  submitButtonSelector: '.popup__button', 
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+export const popupConfig = {
+  containerSelector: '.popup__container',
+  modalParentSelector: '.popup',
+  openModalClass: 'popup_opened'
+};
+
+const profilePopupSelector = '.popup_type_edit-profile';
+const cardListSection = '.photos__card-grid';
+const addCardFormPopup = '.popup_type_add-card';
+const previewPopup = '.popup_type_preview';
+
 const body = document.querySelector('.page');
 
 const profile = body.querySelector('.profile');
 
 const profileEditModal = body.querySelector('.popup_type_edit-profile');
-const profilePopupSelector = '.popup_type_edit-profile';
 
 const cardsContainer = body.querySelector('.photos__card-grid');
-const cardListSection = '.photos__card-grid';
 
 const cardTemplate = body.querySelector('#card-template').content.querySelector('.card');
 
 const addCardModal = body.querySelector('.popup_type_add-card');
-const addCardFormPopup = '.popup_type_add-card';
 
 const previewCardModal = body.querySelector('.popup_type_preview');
-const previewPopup = '.popup_type_preview';
 
+// FORM
 const profileEditModalForm = profileEditModal.querySelector('.popup__form');
-
 const addCardModalForm = addCardModal.querySelector('.popup__form');
 
 const profileEditBtn = profile.querySelector('.profile__edit-button');
@@ -50,7 +66,7 @@ const popupImage = previewCardModal.querySelector('.popup__image');
 
 const previewCaption = previewCardModal.querySelector('.popup__image-caption');
 
-const cardImage = document.querySelector('.photos__card-img');
+const cardImage = cardTemplate.querySelector('.photos__card-img');
 
 export {
   body,
