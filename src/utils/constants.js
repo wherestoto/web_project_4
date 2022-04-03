@@ -10,92 +10,45 @@ export const validationConfig = {
 export const popupConfig = {
   containerSelector: '.popup__container',
   modalParentSelector: '.popup',
-  openModalClass: 'popup_opened'
+  openModalClass: 'popup_opened',
+  closeButtonSelector: '.popup__close-button',
+  popupImageSelector: '.popup__image',
+  popupImageCaptionSelector: '.popup__image-caption'
 };
 
-const profilePopupSelector = '.popup_type_edit-profile';
-const cardListSection = '.photos__card-grid';
-const addCardFormPopup = '.popup_type_add-card';
-const previewPopup = '.popup_type_preview';
+export const cardListSection = '.photos__card-grid';
 
-const body = document.querySelector('.page');
+export const popupType = {
+  editProfileSelector: '.popup_type_edit-profile',
+  addCardSelector: '.popup_type_add-card',
+  previewSelector: '.popup_type_preview'
+}
 
-const profile = body.querySelector('.profile');
+export const profileConfig = {
+  nameSelector: '.profile__name',
+  descriptionSelector: '.profile__description',
+}
 
-const profileEditModal = body.querySelector('.popup_type_edit-profile');
+const cardsContainer = document.querySelector('.photos__card-grid');
 
-const cardsContainer = body.querySelector('.photos__card-grid');
+const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
 
-const cardTemplate = body.querySelector('#card-template').content.querySelector('.card');
+const addCardModal = document.querySelector('.popup_type_add-card');
 
-const addCardModal = body.querySelector('.popup_type_add-card');
+const profileEditBtn = document.querySelector('.profile').querySelector('.profile__edit-button');
 
-const previewCardModal = body.querySelector('.popup_type_preview');
+const addCardBtn = document.querySelector('.profile').querySelector('.profile__add-button');
 
-// FORM
-const profileEditModalForm = profileEditModal.querySelector('.popup__form');
-const addCardModalForm = addCardModal.querySelector('.popup__form');
+const profileEditModal = document.querySelector('.popup_type_edit-profile');
 
-const profileEditBtn = profile.querySelector('.profile__edit-button');
-
-const profileCloseBtn = profileEditModal.querySelector('.popup__close-button');
-
-const placesAddBtn = profile.querySelector('.profile__add-button');
-
-const addCardModalCloseBtn = addCardModal.querySelector('.popup__close-button');
-
-const previewImageModalCloseBtn = previewCardModal.querySelector('.popup__close-button');
-
-const profileName = profile.querySelector('.profile__name');
-
-const profileTitle = profile.querySelector('.profile__description');
-
-const addCardModalInputTitle = addCardModal.querySelector('.popup__input_type_title');
-
-const addCardModalInputLink = addCardModal.querySelector('.popup__input_type_image');
-
-const profileEditModalInputName = profileEditModal.querySelector('.popup__input_type_name');
-
-const profileEditModalInputTitle = profileEditModal.querySelector('.popup__input_type_description');
-
-const addCardSubmitButton = addCardModalForm.querySelector('.popup__button');
-
-const profileSubmitButton = profileEditModalForm.querySelector('.popup__button');
-
-const popupImage = previewCardModal.querySelector('.popup__image');
-
-const previewCaption = previewCardModal.querySelector('.popup__image-caption');
-
-const cardImage = cardTemplate.querySelector('.photos__card-img');
+const profileSubmitButton = profileEditModal.querySelector('.popup__form').querySelector('.popup__button');
 
 export {
-  body,
-  profile,
   profileEditModal,
-  profilePopupSelector,
   cardsContainer,
-  cardListSection,
   cardTemplate,
   addCardModal,
-  addCardFormPopup,
-  profileEditModalForm,
-  addCardModalForm,
   profileEditBtn,
-  profileCloseBtn,
-  placesAddBtn,
-  addCardModalCloseBtn,
-  previewImageModalCloseBtn,
-  profileName,
-  profileTitle,
-  addCardModalInputTitle,
-  addCardModalInputLink,
-  profileEditModalInputName,
-  profileEditModalInputTitle,
-  addCardSubmitButton,
+  addCardBtn,
   profileSubmitButton,
-  previewCardModal,
-  previewPopup,
-  popupImage,
-  previewCaption,
-  cardImage
 };
