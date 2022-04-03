@@ -1,25 +1,67 @@
 import Popup from "./Popup";
 
 export default class PopupWithForms extends Popup {
-  constructor(popupSelector, submitForm) {
-    // two arguments: the popup selector, and a callback function which PopupWithForm calls when the form’s submit event fires.
+  constructor(popupSelector, { submitFormHandler }) {
     super(popupSelector);
-    this._submitForm = submitForm;
+    this._submitFormHandler = submitFormHandler;
+    this._formSelector = this._popup.querySelector('.popup__form');
   }
 
-  close = () => {
+  closeWithSuper = () => {
     super.close();
-    // It modifies the close() parent method in order to reset the form once the popup is closed.
+    this._formSelector.reset();
+  }
+  
+  _handleFormEscClose = (evt) => {
+    if (evt.key === 'Escape') {
+      this.closeWithSuper();
+    }
+  }
+  
+  _checkFormOverlayContainer = (evt) => {
+    if (!evt.target.closest('.popup__container')) {
+      evt.currentTarget.closest('.popup').classList.remove('popup_opened');
+      this._formSelector.reset();
+    };
+  }
+  
+  _getInputValues = () => {
+    this._inputList = this._popup.querySelectorAll('.popup__input');
+    
+    this._formValues = {};
+    
+    this._inputList.forEach(input => {
+      this._formValues[input.name] = input.value;
+    });
+    
+    return this._formValues;
   }
 
-  _getInputValues() {
-    // collects data from all the input fields and returns that data as an object.
+  _handleFormSubmit = (evt) => {
+    evt.preventDefault();
+    
+    this._submitFormHandler(this._getInputValues());
+    
+    this._formSelector.removeEventListener('submit', (evt) => {
+      this._submitFormHandler(this._getInputValues());
+    });
   }
-
-  setEventListeners() {
-    // modifies the setEventListeners() parent method. The setEventListeners() method of the PopupWithForm class has to add the submit event handler to the form and the click event listener to the close icon.
-    super.setEventListeners();
+  
+  setEventListenersWithSuper() {
+    this._popup.querySelector('.popup__close-button').addEventListener('click', this.closeWithSuper); 
+    
+    this._popupList = Array.from(document.querySelectorAll('.popup'));
+    
+    this._popupList.forEach(modalElement => {
+      modalElement.addEventListener('click', this._checkFormOverlayContainer)
+    });
+    
+    if (this._popup.classList.contains('popup_opened')) {
+      document.addEventListener('keydown', this._handleFormEscClose);
+    } else {
+      document.removeEventListener('keydown', this._handleFormEscClose);
+    };
+    
+    this._formSelector.addEventListener('submit', this._handleFormSubmit);
   }
 }
-
-// Finally, Create an instance of the PopupWithForm class for each popup.

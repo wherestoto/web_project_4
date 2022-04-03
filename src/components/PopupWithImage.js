@@ -1,4 +1,3 @@
-import { popupImage, previewCaption } from "../utils/constants";
 import Popup from "./Popup";
 
 export default class PopupWithImage extends Popup {
@@ -7,9 +6,9 @@ export default class PopupWithImage extends Popup {
   }
 
   open = ({ link, caption }) => {
-    popupImage.src = link;
-    popupImage.alt = caption;
-    previewCaption.textContent = caption;
+    this._popup.querySelector('.popup__image').src = link;
+    this._popup.querySelector('.popup__image').alt = caption;
+    this._popup.querySelector('.popup__image-caption').textContent = caption;
     super.open();
   }
 }

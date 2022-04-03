@@ -5,10 +5,9 @@ export default class Popup {
 
   open() {
     this._popup.classList.add('popup_opened');
-    this.setEventListeners();
   }
   
-  close = () => {
+  close() {
     this._popup.classList.remove('popup_opened');
   }
   
@@ -25,10 +24,10 @@ export default class Popup {
   }
   
   setEventListeners() {
-    // close icon evt listener
-    this._popup.querySelector('.popup__close-button').addEventListener('click', this.close);
+    this._popup.querySelector('.popup__close-button').addEventListener('click', () => {
+      this.close();
+    });
     
-    // set overlay event listener:
     this._popupList = Array.from(document.querySelectorAll('.popup'));
 
     this._popupList.forEach(modalElement => {
