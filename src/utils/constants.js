@@ -7,15 +7,6 @@ export const validationConfig = {
   errorClass: 'popup__error_visible'
 };
 
-export const popupConfig = {
-  containerSelector: '.popup__container',
-  modalParentSelector: '.popup',
-  openModalClass: 'popup_opened',
-  closeButtonSelector: '.popup__close-button',
-  popupImageSelector: '.popup__image',
-  popupImageCaptionSelector: '.popup__image-caption'
-};
-
 export const cardListSection = '.photos__card-grid';
 
 export const popupType = {
@@ -29,26 +20,12 @@ export const profileConfig = {
   descriptionSelector: '.profile__description',
 }
 
-const cardsContainer = document.querySelector('.photos__card-grid');
+export const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
 
-const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
+export const addCardModal = document.querySelector('.popup_type_add-card');
 
-const addCardModal = document.querySelector('.popup_type_add-card');
+export const profileEditBtn = document.querySelector('.profile').querySelector('.profile__edit-button');
 
-const profileEditBtn = document.querySelector('.profile').querySelector('.profile__edit-button');
+export const addCardBtn = document.querySelector('.profile').querySelector('.profile__add-button');
 
-const addCardBtn = document.querySelector('.profile').querySelector('.profile__add-button');
-
-const profileEditModal = document.querySelector('.popup_type_edit-profile');
-
-const profileSubmitButton = profileEditModal.querySelector('.popup__form').querySelector('.popup__button');
-
-export {
-  profileEditModal,
-  cardsContainer,
-  cardTemplate,
-  addCardModal,
-  profileEditBtn,
-  addCardBtn,
-  profileSubmitButton,
-};
+export const profileEditModal = document.querySelector('.popup_type_edit-profile');
