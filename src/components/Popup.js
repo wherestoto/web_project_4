@@ -28,7 +28,6 @@ export default class Popup {
   }
 
   _removeEventListeners() {
-    console.log("remove listeners popup.js");
     this._closeButton
     .removeEventListener('click', () => this.close());
     
@@ -40,7 +39,6 @@ export default class Popup {
   }
   
   _setEventListeners() {
-    console.log("add listeners popup.js");
     this._closeButton = this._popup.querySelector('.popup__close-button'); 
     this._closeButton
     .addEventListener('click', () => this.close());
