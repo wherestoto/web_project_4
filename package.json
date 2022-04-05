@@ -4,7 +4,7 @@
   "description": "project coding for sprint 8",
   "private": true,
   "scripts": {
-    "build": "webpack --mode development",
+    "build": "webpack --mode production",
     "dev": "webpack serve"
   },
   "repository": {
