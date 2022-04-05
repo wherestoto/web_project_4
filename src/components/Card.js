@@ -28,8 +28,6 @@ export default class Card {
   
   _handleDeleteCard = () => {
     this._element.remove();
-    // does reviewer want me to remove the code above? 
-    // And insert only the below code? If I do then the delete does not function
     this._element = null;
   }
 

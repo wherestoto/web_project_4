@@ -7,9 +7,8 @@ export default class Popup {
     this._popup.classList.add('popup_opened');
     this._setEventListeners();
   }
-  
-  // Does this have to be an arrow function? I cannot use super.close() PopupWithForms class because it will not inherit the function so I don't understand this change.
-  close() {
+
+  close () {
     this._popup.classList.remove('popup_opened');
     this._removeEventListeners();
   }
@@ -29,31 +28,29 @@ export default class Popup {
   }
 
   _removeEventListeners() {
+    console.log("remove listeners popup.js");
     this._closeButton
-      .removeEventListener('click', () => {
-        this.close
-      });
-
+    .removeEventListener('click', () => this.close());
+    
     this._popup
-      .removeEventListener('click', this._checkOverlayContainer);
-      
+    .removeEventListener('click', this._checkOverlayContainer);
+    
     document
-      .removeEventListener('keydown', this._handleEscClose);
+    .removeEventListener('keydown', this._handleEscClose);
   }
   
   _setEventListeners() {
+    console.log("add listeners popup.js");
     this._closeButton = this._popup.querySelector('.popup__close-button'); 
     this._closeButton
-      .addEventListener('click', () => {
-        this.close
-      });
+    .addEventListener('click', () => this.close());
     
     this._popup
-      .addEventListener('click', this._checkOverlayContainer);
+    .addEventListener('click', this._checkOverlayContainer);
 
     if (this._popup.classList.contains('popup_opened')) {
       document
-        .addEventListener('keydown', this._handleEscClose);
+      .addEventListener('keydown', this._handleEscClose);
     };
   }
 }
