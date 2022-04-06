@@ -9,6 +9,8 @@ import {
   profileEditBtn,
   addCardBtn,
   profileEditModal,
+  profileNameInput, 
+  profileDescriptionInput,
 } from "../utils/constants";
 import { initialCards } from "../utils/initial-cards";
 import Card from "../components/Card";
@@ -81,7 +83,11 @@ const submitProfileForm = new PopupWithForms(popupType.editProfileSelector, {
 
 const openProfileForm = () => {
   editProfileFormValidator.resetValidation();
-  userData.getUserInfo();
+  
+  const { name, description } = userData.getUserInfo();
+  profileNameInput.value = name; 
+  profileDescriptionInput.value = description;
+
   submitProfileForm.open();
 };
 
