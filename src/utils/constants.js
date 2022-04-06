@@ -29,3 +29,7 @@ export const profileEditBtn = document.querySelector('.profile').querySelector('
 export const addCardBtn = document.querySelector('.profile').querySelector('.profile__add-button');
 
 export const profileEditModal = document.querySelector('.popup_type_edit-profile');
+
+export const profileNameInput = document.querySelector('.popup__input_type_name');
+
+export const profileDescriptionInput = document.querySelector('.popup__input_type_description');
