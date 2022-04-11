@@ -1,7 +1,6 @@
 export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
-    // this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   open() {
@@ -9,26 +8,10 @@ export default class Popup {
     this._setEventListeners();
   }
 
-  close = () => {
+  close() {
     this._popup.classList.remove('popup_opened');
     this._removeEventListeners();
   }
-
-  /* REVIEWER NOTES:
-  // addEventListener and removeEventListener 
-  // should be called with the same 
-  // arguments compared by reference.
-  
-  // Here a new function is created so, 
-  // Declare close as an arrow function to not lose the context.
-  close = ()  => {  ... } // this is a Popup instance
-
-  // when open
-  this._closeButton.addEventListener("click", this.close)
-
-  // when close
-  this._closeButton.removeEventListener("click", this.close) 
- */
   
   _handleEscClose = (evt) => {
     if (evt.key === 'Escape') this.close();
