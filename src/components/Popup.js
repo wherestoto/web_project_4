@@ -8,7 +8,8 @@ export default class Popup {
     this._setEventListeners();
   }
 
-  close = () => {
+  close() {
+    // absence of arrow syntax necessary for inheritance
     this._popup.classList.remove('popup_opened');
     this._removeEventListeners();
   }

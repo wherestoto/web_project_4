@@ -13,6 +13,7 @@ export default class PopupWithForms extends Popup {
   }
   
   close = () => {
+    // arrow syntax necessary for inheritance
     this._formElement.reset();
     this._formElement.removeEventListener('submit', this._handleFormSubmit);
     super.close();

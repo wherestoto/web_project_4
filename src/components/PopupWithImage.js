@@ -13,4 +13,9 @@ export default class PopupWithImage extends Popup {
     captionElement.textContent = caption;
     super.open();
   }
+
+  close = () => {
+    // arrow syntax necessary for inheritance
+    super.close();
+  }
 }
