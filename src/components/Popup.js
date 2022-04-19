@@ -1,6 +1,7 @@
 export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
+    this.close = this.close.bind(this);
   }
 
   open() {
@@ -9,7 +10,6 @@ export default class Popup {
   }
 
   close() {
-    // absence of arrow syntax necessary for inheritance
     this._popup.classList.remove('popup_opened');
     this._removeEventListeners();
   }
