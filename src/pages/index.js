@@ -19,6 +19,7 @@ import Section from "../components/Section";
 import PopupWithImage from "../components/PopupWithImage";
 import PopupWithForms from "../components/PopupWithForm";
 import UserInfo from "../components/UserInfo";
+import Api from "../components/Api";
 
 const editProfileFormValidator = new FormValidator(validationConfig, profileEditModal);
 
@@ -94,3 +95,37 @@ const openProfileForm = () => {
 profileEditBtn.addEventListener('click', openProfileForm);
 
 addCardBtn.addEventListener('click', openCardForm);
+
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  headers: {
+    authorization: "3cccee21-d932-4c2e-b1c2-879d2d446f5b",
+    "Content-Type": "application/json"
+  }
+});
+
+api.getUserInfo()
+  .then(data => console.log("UserInfo data: ", data))
+  .catch(err => console.log("UserInfo error: ",err));
+
+api.getInitialCards()
+  .then(data => console.log("Card data: ", data))
+  .catch(err => console.log("Card Error: ",err));
+
+// fetch("https://around.nomoreparties.co/v1/group-12/users/me", {
+//   headers: {
+//     authorization: "3cccee21-d932-4c2e-b1c2-879d2d446f5b", 
+//     "Content-Type": "application/json"
+//   }
+// })
+// .then((res) => {
+//   if (res.ok) {
+//     return res.json();
+//   } return Promise.reject(`Promise Error: ${res.status}`);
+// })
+// .then((data) => {
+//   console.log("Data: ", data);
+// })
+// .catch((err) => {
+//   console.error(err);
+// })
