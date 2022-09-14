@@ -54,7 +54,7 @@ const cardList = new Section(
     renderer: renderCard
   }, cardListSection);
 
-cardList.renderer();
+// cardList.renderer();
 
 const submitCardForm = new PopupWithForms(popupType.addCardSelector, {
   handleSubmit: (item) => {
@@ -123,24 +123,19 @@ const apiUserInfo = () => {
 
 apiUserInfo();
 
-// api.getInitialCards()
-//   .then(data => console.log("Card data: ", data))
-//   .catch(err => console.log("Card Error: ",err));
+const apiInitialCards = () => {
+  api.getInitialCards()
+    .then(data => {
+      const cardList = new Section(
+        {
+          items: data,
+          renderer: renderCard
+        }, cardListSection);
 
-// fetch("https://around.nomoreparties.co/v1/group-12/users/me", {
-//   headers: {
-//     authorization: "3cccee21-d932-4c2e-b1c2-879d2d446f5b", 
-//     "Content-Type": "application/json"
-//   }
-// })
-// .then((res) => {
-//   if (res.ok) {
-//     return res.json();
-//   } return Promise.reject(`Promise Error: ${res.status}`);
-// })
-// .then((data) => {
-//   console.log("Data: ", data);
-// })
-// .catch((err) => {
-//   console.error(err);
-// })
+      cardList.renderer(); // renderer puts the data through a for each 
+      console.log("apicardlist rendered");
+    })
+    .catch(err => console.error("Api Card Data Error: ",err));
+}
+
+apiInitialCards();
