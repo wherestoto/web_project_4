@@ -71,7 +71,8 @@ const openCardForm = () => {
 const userData = new UserInfo(
   {
     userName: profileConfig.nameSelector, 
-    userJob: profileConfig.descriptionSelector
+    userJob: profileConfig.descriptionSelector,
+    userAvatar: profileConfig.avatarSelector
   }
 );
 
@@ -104,13 +105,27 @@ const api = new Api({
   }
 });
 
-api.getUserInfo()
-  .then(data => console.log("UserInfo data: ", data))
-  .catch(err => console.log("UserInfo error: ",err));
+const apiUserInfo = () => {
+  api.getUserInfo()
+    .then(data => {
+      const formData = {
+        name: data.name, 
+        description: data.about, 
+        avatar: data.avatar,
+        id: data._id,
+        cohort: data.cohort
+      };
+      userData.setUserInfo({formData});
+      userData.setUserAvatar({formData});
+    })
+    .catch(err => console.error("UserInfo error: ",err));
+};
 
-api.getInitialCards()
-  .then(data => console.log("Card data: ", data))
-  .catch(err => console.log("Card Error: ",err));
+apiUserInfo();
+
+// api.getInitialCards()
+//   .then(data => console.log("Card data: ", data))
+//   .catch(err => console.log("Card Error: ",err));
 
 // fetch("https://around.nomoreparties.co/v1/group-12/users/me", {
 //   headers: {

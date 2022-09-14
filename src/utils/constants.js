@@ -18,6 +18,7 @@ export const popupType = {
 export const profileConfig = {
   nameSelector: '.profile__name',
   descriptionSelector: '.profile__description',
+  avatarSelector: '.profile__avatar'
 }
 
 export const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
