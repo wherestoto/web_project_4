@@ -54,8 +54,6 @@ const cardList = new Section(
     renderer: renderCard
   }, cardListSection);
 
-// cardList.renderer();
-
 const submitCardForm = new PopupWithForms(popupType.addCardSelector, {
   handleSubmit: (item) => {
     renderCard(item);
@@ -80,6 +78,7 @@ const submitProfileForm = new PopupWithForms(popupType.editProfileSelector, {
   handleSubmit: (formData) => {
     submitProfileForm.close();
     userData.setUserInfo({formData});
+    apiEditUserInfo({name: formData.name, about: formData.description});
   }
 });
 
@@ -133,9 +132,13 @@ const apiInitialCards = () => {
         }, cardListSection);
 
       cardList.renderer(); // renderer puts the data through a for each 
-      console.log("apicardlist rendered");
     })
     .catch(err => console.error("Api Card Data Error: ",err));
 }
 
 apiInitialCards();
+
+function apiEditUserInfo(userInfo) {
+  api.editUserInfo(userInfo)
+  .catch(err => console.error("apiEditUserInfo Error: ", err));
+}
