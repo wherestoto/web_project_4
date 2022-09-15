@@ -17,7 +17,7 @@ export const popupType = {
 
 export const profileConfig = {
   nameSelector: '.profile__name',
-  descriptionSelector: '.profile__description',
+  aboutSelector: '.profile__about',
   avatarSelector: '.profile__avatar'
 }
 
@@ -33,4 +33,4 @@ export const profileEditModal = document.querySelector('.popup_type_edit-profile
 
 export const profileNameInput = document.querySelector('.popup__input_type_name');
 
-export const profileDescriptionInput = document.querySelector('.popup__input_type_description');
+export const profileAboutInput = document.querySelector('.popup__input_type_about');

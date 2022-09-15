@@ -10,7 +10,7 @@ import {
   addCardBtn,
   profileEditModal,
   profileNameInput, 
-  profileDescriptionInput,
+  profileAboutInput,
 } from "../utils/constants";
 import { initialCards } from "../utils/initial-cards";
 import Card from "../components/Card";
@@ -54,8 +54,11 @@ const cardList = new Section(
     renderer: renderCard
   }, cardListSection);
 
+cardList.renderer();
+
 const submitCardForm = new PopupWithForms(popupType.addCardSelector, {
   handleSubmit: (item) => {
+    console.log("submitCardForm item: ", item);
     renderCard(item);
     submitCardForm.close();
   }
@@ -69,7 +72,7 @@ const openCardForm = () => {
 const userData = new UserInfo(
   {
     userName: profileConfig.nameSelector, 
-    userJob: profileConfig.descriptionSelector,
+    userAbout: profileConfig.aboutSelector,
     userAvatar: profileConfig.avatarSelector
   }
 );
@@ -77,17 +80,17 @@ const userData = new UserInfo(
 const submitProfileForm = new PopupWithForms(popupType.editProfileSelector, {
   handleSubmit: (formData) => {
     submitProfileForm.close();
-    userData.setUserInfo({formData});
-    apiEditUserInfo({name: formData.name, about: formData.description});
+    userData.setUserInfo(formData);
+    apiEditUserInfo({name: formData.name, about: formData.about});
   }
 });
 
 const openProfileForm = () => {
   editProfileFormValidator.resetValidation();
   
-  const { name, description } = userData.getUserInfo();
+  const { name, about } = userData.getUserInfo();
   profileNameInput.value = name; 
-  profileDescriptionInput.value = description;
+  profileAboutInput.value = about;
 
   submitProfileForm.open();
 };
@@ -107,15 +110,9 @@ const api = new Api({
 const apiUserInfo = () => {
   api.getUserInfo()
     .then(data => {
-      const formData = {
-        name: data.name, 
-        description: data.about, 
-        avatar: data.avatar,
-        id: data._id,
-        cohort: data.cohort
-      };
-      userData.setUserInfo({formData});
-      userData.setUserAvatar({formData});
+      console.log(data);
+      userData.setUserInfo(data);
+      userData.setUserAvatar(data);
     })
     .catch(err => console.error("UserInfo error: ",err));
 };
