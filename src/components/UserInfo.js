@@ -20,7 +20,6 @@ export default class UserInfo {
   }
   
   setUserAvatar = (formData) => {
-    console.log(formData.avatar);
     this._profileAvatarElement.src = formData.avatar;
   }
 }

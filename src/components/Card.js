@@ -31,6 +31,13 @@ export default class Card {
     this._element = null;
   }
 
+  _handleName = () => {
+    // checks and reassigns cards with "name"
+    if (this._data.name) {
+      this._data.title = this._data.name;
+    }
+  }
+
   generateCard() {
     this._element = this._getTemplate();
 
@@ -38,7 +45,7 @@ export default class Card {
     this._cardDeleteButton = this._element.querySelector('.button_type_delete');
     this._cardImage = this._element.querySelector('.photos__card-img');
     const cardTitle = this._element.querySelector('.photos__title');
-    this._data.title = this._data.name; // assigns data.name to data.title
+    this._handleName();
 
     this._cardImage.src = this._data.link;
     this._cardImage.alt = this._data.title;

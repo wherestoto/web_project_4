@@ -54,12 +54,12 @@ const cardList = new Section(
     renderer: renderCard
   }, cardListSection);
 
-cardList.renderer();
+// cardList.renderer();
 
 const submitCardForm = new PopupWithForms(popupType.addCardSelector, {
   handleSubmit: (item) => {
-    console.log("submitCardForm item: ", item);
     renderCard(item);
+    apiAddCard(item);
     submitCardForm.close();
   }
 });
@@ -81,7 +81,7 @@ const submitProfileForm = new PopupWithForms(popupType.editProfileSelector, {
   handleSubmit: (formData) => {
     submitProfileForm.close();
     userData.setUserInfo(formData);
-    apiEditUserInfo({name: formData.name, about: formData.about});
+    apiEditUserInfo(formData);
   }
 });
 
@@ -110,7 +110,6 @@ const api = new Api({
 const apiUserInfo = () => {
   api.getUserInfo()
     .then(data => {
-      console.log(data);
       userData.setUserInfo(data);
       userData.setUserAvatar(data);
     })
@@ -135,7 +134,14 @@ const apiInitialCards = () => {
 
 apiInitialCards();
 
-function apiEditUserInfo(userInfo) {
+const apiEditUserInfo = (userInfo) => {
   api.editUserInfo(userInfo)
   .catch(err => console.error("apiEditUserInfo Error: ", err));
+}
+  
+const apiAddCard = (cardInfo) => {
+    console.log("apiAddCard cardInfo: ", cardInfo);
+    api.createCard(cardInfo)
+    .then(data => console.log(data))
+    .catch(err => console.error("apiEditUserInfo Error: ", err));
 }
