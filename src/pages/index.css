@@ -42,3 +42,21 @@
 @import url(../blocks/popup/__error/popup__error.css);
 @import url(../blocks/popup/__error/popup__error_visible.css);
 @import url(../blocks/popup/__button/popup__button_disabled.css);
+
+.reaction__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 22px;
+  margin-bottom: 22px;
+}
+
+.reaction__count_likes {
+  width: 9px;
+  height: 13px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15.73px;
+  color: #000000;
+  margin-top: 3px;
+}
