@@ -60,3 +60,11 @@
   color: #000000;
   margin-top: 3px;
 }
+
+.popup__container_type_delete {
+  width: 430px;
+}
+
+.button_margin_s {
+  margin-top: 36px;
+}
