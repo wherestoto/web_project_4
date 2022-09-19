@@ -12,7 +12,8 @@ export const cardListSection = '.photos__card-grid';
 export const popupType = {
   editProfileSelector: '.popup_type_edit-profile',
   addCardSelector: '.popup_type_add-card',
-  previewSelector: '.popup_type_preview'
+  previewSelector: '.popup_type_preview',
+  deleteCardSelector: '.popup_type_delete-card'
 }
 
 export const profileConfig = {
@@ -24,6 +25,10 @@ export const profileConfig = {
 export const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
 
 export const addCardModal = document.querySelector('.popup_type_add-card');
+
+export const deleteCardModal = document.querySelector('.popup_type_delete-card');
+
+export const deleteCardBtn = document.querySelector('.button_type_delete');
 
 export const profileEditBtn = document.querySelector('.profile').querySelector('.profile__edit-button');
 
