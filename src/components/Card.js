@@ -1,9 +1,10 @@
 export default class Card {
-  constructor(data, template, { handleCardClick }) {
+  constructor(data, template, { handleCardClick }, { handleTrashClick }) {
     this._template = template; 
     this._data = data;
     this._element = null;
     this._handleCardClick = handleCardClick;
+    this._handleTrashClick = handleTrashClick;
   }
   
   _getTemplate() {
@@ -16,8 +17,8 @@ export default class Card {
     .addEventListener('click', this._handleLikeButton);
 
     this._cardDeleteButton
-    .addEventListener('click', this._handleDeleteCard);
-    
+    .addEventListener('click', this._handleTrashClick);
+
     this._cardImage
     .addEventListener('click', this._handleCardClick);
   }
@@ -26,7 +27,7 @@ export default class Card {
     evt.currentTarget.classList.toggle('photos__like-button_active');
   }
   
-  _handleDeleteCard = () => {
+  handleDeleteCard = () => {
     this._element.remove();
     this._element = null;
   }

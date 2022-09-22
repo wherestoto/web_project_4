@@ -20,6 +20,7 @@ import PopupWithImage from "../components/PopupWithImage";
 import PopupWithForms from "../components/PopupWithForm";
 import UserInfo from "../components/UserInfo";
 import Api from "../components/Api";
+import PopupWithDelete from "../components/PopupWithDelete";
 
 const editProfileFormValidator = new FormValidator(validationConfig, profileEditModal);
 
@@ -30,6 +31,8 @@ const addCardFormValidator = new FormValidator(validationConfig, addCardModal);
 addCardFormValidator.enableValidation();
 
 const previewCardPopup = new PopupWithImage(popupType.previewSelector);
+
+const deleteCardPopup = new PopupWithDelete(popupType.deleteCardSelector);
 
 const renderCard = (item) => {
   const card = new Card(
@@ -43,6 +46,15 @@ const renderCard = (item) => {
             caption: item.target.alt
           }
         )
+      }
+    },
+    {
+      handleTrashClick: () => {
+        deleteCardPopup.open();
+        deleteCardPopup.setSubmitAction(() => {
+          // insert api for removing card from DOM
+          card.handleDeleteCard();
+        });
       }
     });
   cardList.addItem(card.generateCard());
