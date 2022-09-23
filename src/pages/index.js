@@ -34,6 +34,8 @@ const previewCardPopup = new PopupWithImage(popupType.previewSelector);
 
 const deleteCardPopup = new PopupWithDelete(popupType.deleteCardSelector);
 
+deleteCardPopup.setEventListeners();
+
 const renderCard = (item) => {
   const card = new Card(
     item,
