@@ -8,22 +8,22 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } return Promise.reject(`Error: ${res.status}`);
-      });
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } return Promise.reject(`Error: ${res.status}`);
+    });
   }
     
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } return Promise.reject(`Promise Error: ${res.status}`);
-      });
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } return Promise.reject(`Promise Error: ${res.status}`);
+    });
   }
 
   editUserInfo(userInfo) {
@@ -51,10 +51,23 @@ export default class Api {
         link: cardInfo.link
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } return Promise.reject(`Error: ${res.status}`);
-      });
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+    .then(res => {
+      if (res.ok) {
+        console.log("apiDeleteCard: ", res);
+        return res.json();
+      } return Promise.reject(`Error: ${res.status}`);
+    });
   }
 }

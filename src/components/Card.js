@@ -18,9 +18,15 @@ export default class Card {
 
     this._cardDeleteButton
     .addEventListener('click', this._handleTrashClick);
-
+    
     this._cardImage
     .addEventListener('click', this._handleCardClick);
+  }
+
+  getCardId = () => {
+    if (this._data.owner._id === "5872314bc3b100b98081a62a") {
+      return this._data._id;
+    } else console.log("Card gCId error");
   }
   
   _handleLikeButton = (evt) => {

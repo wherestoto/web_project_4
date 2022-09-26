@@ -34,8 +34,6 @@ const previewCardPopup = new PopupWithImage(popupType.previewSelector);
 
 const deleteCardPopup = new PopupWithDelete(popupType.deleteCardSelector);
 
-deleteCardPopup.setEventListeners();
-
 const renderCard = (item) => {
   const card = new Card(
     item,
@@ -51,11 +49,12 @@ const renderCard = (item) => {
       }
     },
     {
-      handleTrashClick: () => {
+      handleTrashClick: (item) => {
         deleteCardPopup.open();
         deleteCardPopup.setSubmitAction(() => {
-          // insert api for removing card from DOM
           card.handleDeleteCard();
+          apiDeleteCard(card.getCardId());
+          deleteCardPopup.close();
         });
       }
     });
@@ -157,5 +156,12 @@ const apiAddCard = (cardInfo) => {
     console.log("apiAddCard cardInfo: ", cardInfo);
     api.createCard(cardInfo)
     .then(data => console.log(data))
-    .catch(err => console.error("apiEditUserInfo Error: ", err));
+    .catch(err => console.error("apiAddCard Error: ", err));
+}
+
+const apiDeleteCard = (id) => {
+  console.log("apiDeleteCard Initiated");
+  api.deleteCard(id)
+  .then(data => console.log(data))
+  .catch(err => console.error("apiDeleteCard Error: ", err))
 }
