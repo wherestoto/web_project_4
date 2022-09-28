@@ -96,4 +96,17 @@ export default class Api {
       } return Promise.reject(`Error: ${res.status}`);
     });
   }
+
+  editAvatar() {
+    return fetch(`${this._baseUrl}users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+    })
+    .then(res => {
+      if (res.ok) {
+        console.log("editAvatar: ", res); 
+        return res.json();
+      } return Promise.reject(`Error: ${res.status}`);
+    });
+  }
 }
