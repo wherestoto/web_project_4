@@ -39,6 +39,17 @@ const renderCard = (item) => {
     item,
     cardTemplate,
     {
+      handleCurrentUser: () => {
+        api.getUserInfo()
+        .then(data => {
+          card.handleTrashIcon(data._id);
+          card.getUserId(data._id);
+          card.setLikeButton();
+        })
+        .catch(err => console.error(err));
+      }
+    },
+    {
       handleCardClick: (item) => {
         previewCardPopup.open(
           {
@@ -49,15 +60,45 @@ const renderCard = (item) => {
       }
     },
     {
-      handleTrashClick: (item) => {
+      handleTrashClick: () => {
         deleteCardPopup.open();
         deleteCardPopup.setSubmitAction(() => {
-          card.handleDeleteCard();
-          apiDeleteCard(card.getCardId());
+          apiDeleteCard(card.handleDeleteCard());
           deleteCardPopup.close();
         });
       }
-    });
+    },
+    {
+      handleLikeClick: (evt) => {
+        card.handleLikeButton(evt, 
+          {
+            addLike: () => {
+              const apiAddLikes = (id) => {
+                api.addLikes(id)
+                .then(data => {
+                  card.handleLikesCounter(data.likes.length);
+                })
+                .catch(err => console.error("apiAddLikes Error: ", err))
+              };
+              apiAddLikes(card.getCardId());
+            }
+          },
+          {
+            removeLike: () => {
+              const apiRemoveLikes = (id) => {
+                api.removeLikes(id)
+                .then(data => {
+                  card.handleLikesCounter(data.likes.length);
+                })
+                .catch(err => console.error("apiDeleteLikes Error: ", err))
+              };
+              apiRemoveLikes(card.getCardId());
+            }
+          }
+        );
+      }
+    }
+  );
   cardList.addItem(card.generateCard());
 };
 
@@ -149,19 +190,20 @@ apiInitialCards();
 
 const apiEditUserInfo = (userInfo) => {
   api.editUserInfo(userInfo)
+  .then(data => console.log("apiEditUserInfo data: ", data))
   .catch(err => console.error("apiEditUserInfo Error: ", err));
 }
   
 const apiAddCard = (cardInfo) => {
     console.log("apiAddCard cardInfo: ", cardInfo);
     api.createCard(cardInfo)
-    .then(data => console.log(data))
+    .then(data => console.log("apiAddCard Data: ", data))
     .catch(err => console.error("apiAddCard Error: ", err));
 }
 
 const apiDeleteCard = (id) => {
   console.log("apiDeleteCard Initiated");
   api.deleteCard(id)
-  .then(data => console.log(data))
+  .then(data => console.log("apiDeleteCard data:", data))
   .catch(err => console.error("apiDeleteCard Error: ", err))
 }
